@@ -1,0 +1,49 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>SMEMS | Sign In</title>
+	
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	
+	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+	<h:outputScript library="js" name="popper.min.js"></h:outputScript>
+	
+</h:head> 
+<body> 
+	<h:form>
+		<div class="signInBox">
+			<h4>SME Management System</h4>
+			<div class="card">
+		 		<div class="card-body">
+			    	<h5 class="card-title">Sign In</h5>
+			    	<div class="alert alert-primary" role="alert">
+					</div>
+			    	<div class="form-group">
+			    		<label class="text-secondary">Username</label>
+			    		<h:inputText  styleClass="form-control rounded-pill" />
+			    	</div>
+			    	<div class="form-group">
+			    		<label class="text-secondary">Password</label>
+			    		<h:inputSecret styleClass="form-control rounded-pill" />
+			    	</div>
+			    	<div class="row mt-4">
+			    		<div class="col">
+			    			<h:commandLink value="Clear" styleClass="btn btn-outline-danger form-control rounded-pill" ></h:commandLink>
+			    		</div>
+			    		<div class="col">
+			    			<h:commandLink value="Sign In" styleClass="btn btn-outline-primary form-control rounded-pill" />
+			    		</div>
+			    	</div>
+		  		</div>
+			</div>
+		</div>
+	</h:form>
+</body> 
+</html>
