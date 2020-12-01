@@ -1,0 +1,113 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+	<title>SMEMS | Admin | Account Configuration</title>
+	
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	
+	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+	<h:outputScript library="js" name="popper.min.js"></h:outputScript>
+
+</h:head> 
+<body> 
+<h:form>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">SMEMS</a>
+			<div class="collapse navbar-collapse ml-auto" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Account Config</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid mt-3">
+		<div class="row">
+			<div class="col-4">
+				<div class="card">
+				  <div class="card-header">
+				  	Add New Account
+				  </div>
+				  <div class="card-body">
+				  	<div class="form-group">
+				  		<span>Name</span>
+				  		<h:inputText value="#{configAccountBean.account.name}" styleClass="form-control" />
+				  	</div>
+				  	<div class="form-group">
+				  		<span>Phone</span>
+				  		<h:inputText value="#{configAccountBean.account.phone}" styleClass="form-control" />
+				  	</div>
+				  	<div class="form-group">
+				  		<span>Email</span>
+				  		<h:inputText value="#{configAccountBean.account.email}" styleClass="form-control" />
+				  	</div>
+				  	<div class="form-group">
+				  		<span>User Name</span>
+				  		<h:inputText value="#{configAccountBean.account.username}" styleClass="form-control" />
+				  	</div>
+				  	<div class="form-group">
+				  		<span>Password</span>
+				  		<h:inputText value="#{configAccountBean.account.password}" styleClass="form-control" />
+				  	</div>
+				  	<div class="form-group">
+				  		<span>Address</span>
+				  		<h:inputTextarea value="#{configAccountBean.account.address}" styleClass="form-control" />
+				  	</div>
+				  	<div class="form-group row">
+				  		<div class="col">
+				  			<h:commandLink styleClass="btn btn-danger form-control" value="Clear" />
+				  		</div>
+				  		<div class="col">
+				  			<h:commandLink action="#{configAccountBean.save()}" styleClass="btn btn-success form-control" value="Save" />
+				  		</div>
+				  	</div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-8">
+				<h:dataTable value="#{configAccountBean.accounts}" var="a" styleClass="table">
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+						#{a.id}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Name</f:facet>
+						#{a.name}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Phone</f:facet>
+						#{a.phone}
+					</h:column>
+					<h:column>
+						<f:facet name="header">User Name</f:facet>
+						#{a.username}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Password</f:facet>
+						#{a.password}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Address</f:facet>
+						#{a.address}
+					</h:column>
+				</h:dataTable>
+			</div>
+		</div>
+	</div>
+</h:form>
+</body> 
+</html>
