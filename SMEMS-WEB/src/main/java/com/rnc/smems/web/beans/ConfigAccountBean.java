@@ -29,7 +29,12 @@ public class ConfigAccountBean implements Serializable{
 	@PostConstruct
 	public void initialize () {
 		account = new Account();
-		accounts = accountService.findAll();
+		try {
+			accounts = accountService.findAll();
+		} catch (Exception e) {
+			
+		}
+		
 	}
 	
 	public void save ()  {
