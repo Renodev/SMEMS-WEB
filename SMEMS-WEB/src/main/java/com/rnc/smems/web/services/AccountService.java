@@ -1,5 +1,6 @@
 package com.rnc.smems.web.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -15,14 +16,22 @@ public class AccountService {
 	
 	@Inject
 	private AccountRepository accountRepository;
-
+	
 	public void save (Account account) {
-		accountRepository.persist(account);
+		account.setId(LocalDateTime.now().toString());
+		accountRepository.save(account);
+	}
+	
+	public void update (Account account) {
+		
+	}
+	
+	public void delete (Account account) {
+		
 	}
 	
 	public List<Account> findAll() {
-		List<Account> accounts = accountRepository.findAll();
-		return accounts;
+		return null;
 	}
-	
+		
 }

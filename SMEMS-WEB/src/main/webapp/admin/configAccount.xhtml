@@ -79,30 +79,24 @@
 				</div>
 			</div>
 			<div class="col-8">
-				<h:dataTable value="#{configAccountBean.accounts}" var="a" styleClass="table">
+				<h:dataTable var="a" styleClass="table">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
-						#{a.id}
 					</h:column>
 					<h:column>
 						<f:facet name="header">Name</f:facet>
-						#{a.name}
 					</h:column>
 					<h:column>
 						<f:facet name="header">Phone</f:facet>
-						#{a.phone}
 					</h:column>
 					<h:column>
 						<f:facet name="header">User Name</f:facet>
-						#{a.username}
 					</h:column>
 					<h:column>
 						<f:facet name="header">Password</f:facet>
-						#{a.password}
 					</h:column>
 					<h:column>
 						<f:facet name="header">Address</f:facet>
-						#{a.address}
 					</h:column>
 				</h:dataTable>
 			</div>

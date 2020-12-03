@@ -19,6 +19,6 @@
 	</dependency>
   </dependencies>
   <build>
-  	<finalName>mfvp-web</finalName>
+  	<finalName>smems-web</finalName>
   </build>
 </project>
