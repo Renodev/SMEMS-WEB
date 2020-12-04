@@ -1,6 +1,7 @@
 package com.rnc.smems.web.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -22,6 +23,8 @@ public class ConfigAccountBean implements Serializable{
 	// object Declaration
 	private Account account; // member object
 	
+	private List<Account> accounts;
+	
 	@Inject
 	private AccountService accountService;
 	
@@ -29,10 +32,12 @@ public class ConfigAccountBean implements Serializable{
 	public void initialize () {
 		// account object initialization
 		account = new Account(); // statefull
+		accounts = accountService.findAll();
 	}
 	
 	public void save () {
 		accountService.save(account);
+		initialize();
 	}
 	
 	public Account getAccount() {
@@ -41,6 +46,14 @@ public class ConfigAccountBean implements Serializable{
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
 
 }
