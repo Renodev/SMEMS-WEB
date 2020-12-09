@@ -36,77 +36,83 @@
 	</nav>
 
 	<div class="container-fluid mt-3">
-		<div class="row">
-			<div class="col-4">
 				<div class="card">
 				  <div class="card-header">
 				  	Add New Account
 				  </div>
 				  <div class="card-body">
-				  	<div class="form-group">
-				  		<span>Name</span>
-				  		<h:inputText value="#{configAccountBean.account.name}" styleClass="form-control" />
+				  	
+				  	<div class="row">
+				  		<div class="form-group col-4">
+				  			<span>Name</span>
+				  			<h:inputText value="#{configAccountBean.account.name}" styleClass="form-control" />
+				  		</div>
+				  		<div class="form-group col-4">
+					  		<span>Phone</span>
+					  		<h:inputText value="#{configAccountBean.account.phone}" styleClass="form-control" />
+					  	</div>
+					  	<div class="form-group col-4">
+					  		<span>Email</span>
+					  		<h:inputText value="#{configAccountBean.account.email}" styleClass="form-control" />
+					  	</div>
 				  	</div>
-				  	<div class="form-group">
-				  		<span>Phone</span>
-				  		<h:inputText value="#{configAccountBean.account.phone}" styleClass="form-control" />
-				  	</div>
-				  	<div class="form-group">
-				  		<span>Email</span>
-				  		<h:inputText value="#{configAccountBean.account.email}" styleClass="form-control" />
-				  	</div>
-				  	<div class="form-group">
-				  		<span>User Name</span>
-				  		<h:inputText value="#{configAccountBean.account.username}" styleClass="form-control" />
-				  	</div>
-				  	<div class="form-group">
-				  		<span>Password</span>
-				  		<h:inputText value="#{configAccountBean.account.password}" styleClass="form-control" />
-				  	</div>
-				  	<div class="form-group">
-				  		<span>Address</span>
-				  		<h:inputTextarea value="#{configAccountBean.account.address}" styleClass="form-control" />
+				  	<div class="row">
+				  		<div class="form-group col-4">
+					  		<span>User Name</span>
+					  		<h:inputText value="#{configAccountBean.account.username}" styleClass="form-control" />
+					  	</div>
+					  	<div class="form-group col-4">
+					  		<span>Password</span>
+					  		<h:inputText value="#{configAccountBean.account.password}" styleClass="form-control" />
+					  	</div>
+					  	<div class="form-group col-4">
+					  		<span>Address</span>
+					  		<h:inputText value="#{configAccountBean.account.address}" styleClass="form-control" />
+					  	</div>
 				  	</div>
 				  	<div class="form-group row">
-				  		<div class="col">
+				  		<div class="col-4"></div>
+				  		<div class="col-4">
 				  			<h:commandLink styleClass="btn btn-danger form-control" value="Clear" />
 				  		</div>
-				  		<div class="col">
+				  		<div class="col-4">
 				  			<h:commandLink action="#{configAccountBean.save()}" styleClass="btn btn-success form-control" value="Save" />
 				  		</div>
 				  	</div>
 				  </div>
-				</div>
 			</div>
-			<div class="col-8">
-				<h:dataTable value="#{configAccountBean.accounts}" var="a" styleClass="table">
-					<h:column>
-						<f:facet name="header">ID</f:facet>
-						#{a.id}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Name</f:facet>
-						#{a.name}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Phone</f:facet>
-						#{a.phone}
-					</h:column>
-					<h:column>
-						<f:facet name="header">User Name</f:facet>
-						#{a.username}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Password</f:facet>
-						#{a.password}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Address</f:facet>
-						#{a.address}
-					</h:column>
-				</h:dataTable>
-			</div>
-		</div>
+		<h:dataTable value="#{configAccountBean.accounts}" var="a" styleClass="table">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{a.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				#{a.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Phone</f:facet>
+				#{a.phone}
+			</h:column>
+			<h:column>
+				<f:facet name="header">User Name</f:facet>
+				#{a.username}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Password</f:facet>
+				#{a.password}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Address</f:facet>
+				#{a.address}
+			</h:column>
+			<h:column>
+				<h:commandLink action="#{configAccountBean.update(a)}" value="Update" styleClass="btn btn-primary" />
+			</h:column>
+			<h:column>
+				<h:commandLink action="#{configAccountBean.delete(a)}" value="Delete" styleClass="btn btn-danger" />
+			</h:column>
+		</h:dataTable>
 	</div>
 </h:form>
 </body> 

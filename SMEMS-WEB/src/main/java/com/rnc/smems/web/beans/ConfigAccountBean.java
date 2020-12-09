@@ -40,6 +40,15 @@ public class ConfigAccountBean implements Serializable{
 		initialize();
 	}
 	
+	public void update (Account account) {
+		this.account = account;
+	}
+	
+	public void delete (Account account) {
+		accountService.delete(account);
+		initialize();
+	}
+	
 	public Account getAccount() {
 		return account;
 	}

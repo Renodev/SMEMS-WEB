@@ -18,16 +18,21 @@ public class AccountService {
 	private AccountRepository accountRepository;
 	
 	public void save (Account account) {
-		account.setId(LocalDateTime.now().toString());
-		accountRepository.save(account);
-	}
-	
-	public void update (Account account) {
-		
+		if (account.getId() == null) {
+			account.setId(LocalDateTime.now().toString());
+			accountRepository.save(account);
+		} else {
+			accountRepository.update(account);
+		}
 	}
 	
 	public void delete (Account account) {
-		
+		Account acc = findByID(account.getId());
+		accountRepository.delete(acc);
+	}
+	
+	public Account findByID (String id) {
+		return accountRepository.findByID(id);
 	}
 	
 	public List<Account> findAll() {
