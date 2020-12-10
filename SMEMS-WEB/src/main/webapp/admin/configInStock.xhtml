@@ -7,7 +7,7 @@
 
 <h:head>
 
-	<title>SMEMS | Admin | Material Configuration</title>
+	<title>SMEMS | Admin | In Stock Configuration</title>
 	
 	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
 	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
@@ -31,10 +31,10 @@
 						<li class="nav-item">
 							<a class="nav-link" href="configAccount.xhtml">Account Config</a>
 						</li>
-						<li class="nav-item active">
+						<li class="nav-item">
 							<a class="nav-link" href="configMaterial.xhtml">Material Config</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item active">
 							<a class="nav-link" href="configInStock.xhtml">In Stock Config</a>
 						</li>
 					</ul>
@@ -45,18 +45,22 @@
 		<div class="container-fluid mt-3">
 				<div class="card">
 				  <div class="card-header">
-				  	Add New Material
+				  	Add New In Stock
 				  </div>
 				  <div class="card-body">
 				  	<div class="row">
 				  		<div class="form-group col-4">
-				  			<span>Name</span>
-				  			<h:inputText value="#{configMaterialBean.material.name}" styleClass="form-control" />
+				  			<span>Material</span>
+				  			<h:selectOneMenu styleClass="form-control" style="height: 38px;"></h:selectOneMenu>
 				  		</div>
-				  		<div class="form-group col-8">
-					  		<span>Description</span>
-					  		<h:inputText value="#{configMaterialBean.material.description}" styleClass="form-control" />
+				  		<div class="form-group col-4">
+					  		<span>Quantity</span>
+					  		<h:inputText styleClass="form-control" />
 					  	</div>
+					  	<div class="form-group col-4">
+				  			<span>Status</span>
+				  			<h:selectOneMenu styleClass="form-control" style="height: 38px;"></h:selectOneMenu>
+				  		</div>
 				  	</div>
 				  	<div class="form-group row">
 				  		<div class="col-4"></div>
@@ -64,29 +68,37 @@
 				  			<h:commandLink styleClass="btn btn-danger form-control" value="Clear" />
 				  		</div>
 				  		<div class="col-4">
-				  			<h:commandLink action="#{configMaterialBean.save()}" styleClass="btn btn-success form-control" value="Save" />
+				  			<h:commandLink styleClass="btn btn-success form-control" value="Save" />
 				  		</div>
 				  	</div>
 				  </div>
 				</div>
-				<h:dataTable value="#{configMaterialBean.materials}" var="m" styleClass="table">
+				<h:dataTable styleClass="table">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
-						#{m.id}
+						
 					</h:column>
 					<h:column>
-						<f:facet name="header">Name</f:facet>
-						#{m.name}
+						<f:facet name="header">Date</f:facet>
+						
 					</h:column>
 					<h:column>
-						<f:facet name="header">Description</f:facet>
-						#{m.description}
+						<f:facet name="header">Material</f:facet>
+						
 					</h:column>
 					<h:column>
-						<h:commandLink action="#{configMaterialBean.update(m)}" value="Update" styleClass="btn btn-primary" />
+						<f:facet name="header">Quantity</f:facet>
+						
 					</h:column>
 					<h:column>
-						<h:commandLink action="#{configMaterialBean.delete(m)}" value="Delete" styleClass="btn btn-danger" />
+						<f:facet name="header">Status</f:facet>
+						
+					</h:column>
+					<h:column>
+						<h:commandLink value="Update" styleClass="btn btn-primary" />
+					</h:column>
+					<h:column>
+						<h:commandLink value="Delete" styleClass="btn btn-danger" />
 					</h:column>
 				</h:dataTable>
 			</div>
