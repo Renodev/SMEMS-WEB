@@ -37,6 +37,9 @@
 						<li class="nav-item active">
 							<a class="nav-link" href="configInStock.xhtml">In Stock Config</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="warehouse.xhtml">Warehouse</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -51,15 +54,23 @@
 				  	<div class="row">
 				  		<div class="form-group col-4">
 				  			<span>Material</span>
-				  			<h:selectOneMenu styleClass="form-control" style="height: 38px;"></h:selectOneMenu>
+				  			<h:selectOneMenu value="#{configInStockBean.inStock.material}" converter="#{materialConverter}" styleClass="form-control" style="height: 38px;">
+				  				<f:selectItems value="#{configInStockBean.materials}" var="m" itemValue="#{m}" itemLabel="#{m.name}"></f:selectItems>
+				  			</h:selectOneMenu>
 				  		</div>
 				  		<div class="form-group col-4">
 					  		<span>Quantity</span>
-					  		<h:inputText styleClass="form-control" />
+					  		<h:inputText value="#{configInStockBean.inStock.quantity}" styleClass="form-control" />
 					  	</div>
 					  	<div class="form-group col-4">
 				  			<span>Status</span>
-				  			<h:selectOneMenu styleClass="form-control" style="height: 38px;"></h:selectOneMenu>
+				  			<h:selectOneMenu value="#{configInStockBean.inStock.inStockStatus}" styleClass="form-control" style="height: 38px;">
+				  				<f:selectItems value="#{configInStockBean.statuses}" var="s" itemValue="#{s}" itemLabel="#{s}"></f:selectItems>
+				  			</h:selectOneMenu>
+				  		</div>
+				  		<div class="form-group col-12">
+				  			<span>Description</span>
+				  			<h:inputText value="#{configInStockBean.inStock.description}" styleClass="form-control" />
 				  		</div>
 				  	</div>
 				  	<div class="form-group row">
@@ -68,41 +79,44 @@
 				  			<h:commandLink styleClass="btn btn-danger form-control" value="Clear" />
 				  		</div>
 				  		<div class="col-4">
-				  			<h:commandLink styleClass="btn btn-success form-control" value="Save" />
+				  			<h:commandLink action="#{configInStockBean.save()}" styleClass="btn btn-success form-control" value="Save" />
 				  		</div>
 				  	</div>
 				  </div>
 				</div>
-				<h:dataTable styleClass="table">
+				<h:dataTable value="#{configInStockBean.inStocks}" var="i" styleClass="table">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
-						
+						#{i.id}
 					</h:column>
 					<h:column>
 						<f:facet name="header">Date</f:facet>
-						
+						#{i.date}
 					</h:column>
 					<h:column>
 						<f:facet name="header">Material</f:facet>
-						
+						#{i.material.name}
 					</h:column>
 					<h:column>
 						<f:facet name="header">Quantity</f:facet>
-						
+						#{i.quantity}
 					</h:column>
 					<h:column>
 						<f:facet name="header">Status</f:facet>
-						
+						<span class="#{configInStockBean.generateStockColor(i.inStockStatus)}"> #{i.inStockStatus} </span>
 					</h:column>
 					<h:column>
-						<h:commandLink value="Update" styleClass="btn btn-primary" />
+						<f:facet name="header">Description</f:facet>
+						#{i.description}
 					</h:column>
 					<h:column>
-						<h:commandLink value="Delete" styleClass="btn btn-danger" />
+						<h:commandLink action="#{configInStockBean.update(i)}" value="Update" styleClass="btn btn-primary" />
+					</h:column>
+					<h:column>
+						<h:commandLink action="#{configInStockBean.delete(i)}" value="Delete" styleClass="btn btn-danger" />
 					</h:column>
 				</h:dataTable>
 			</div>
-			
 		
 	</h:form>
 

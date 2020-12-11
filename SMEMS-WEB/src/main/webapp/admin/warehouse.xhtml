@@ -1,0 +1,66 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+	<title>SMEMS | Admin | Material Configuration</title>
+	
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	
+	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+	<h:outputScript library="js" name="popper.min.js"></h:outputScript>
+
+</h:head> 
+<body> 
+
+	<h:form>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand bg-white pt-1 pb-1 pl-5 pr-5 rounded-pill font-weight-bold text-dark" href="#">SMEMS</a>
+				<div class="collapse navbar-collapse ml-auto" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="configAccount.xhtml">Account Config</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="configMaterial.xhtml">Material Config</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="configInStock.xhtml">In Stock Config</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="warehouse.xhtml">Warehouse</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="container-fluid row p-4">
+			<ui:repeat var="m" value="#{warehouseBean.materials}">
+				<div class="col-3">
+					<div class="card text-dark bg-light mb-2">
+					  <div class="card-header"> #{m.name} </div>
+					  <div class="card-body">
+					    <h5 class="card-title"> #{warehouseBean.generateQuantity(m)} Packs </h5>
+					    <p class="card-text"> #{m.description} </p>
+					  </div>
+					</div>
+				</div>
+			</ui:repeat>
+		</div>
+		
+		
+	</h:form>
+
+</body> 
+</html>

@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import com.rnc.smems.web.enums.InStockStatus;
@@ -31,6 +32,9 @@ public class InStock implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	private InStockStatus inStockStatus;
+	
+	@Lob
+	private String description;
 	
 	private boolean erase;
 
@@ -80,6 +84,14 @@ public class InStock implements Serializable {
 
 	public void setErase(boolean erase) {
 		this.erase = erase;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }
