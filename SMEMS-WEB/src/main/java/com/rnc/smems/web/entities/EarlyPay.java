@@ -28,6 +28,8 @@ public class EarlyPay implements Serializable {
 	
 	@Lob
 	private String description;
+	
+	private boolean erase;
 
 	public long getId() {
 		return id;
@@ -67,6 +69,14 @@ public class EarlyPay implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isErase() {
+		return erase;
+	}
+
+	public void setErase(boolean erase) {
+		this.erase = erase;
 	}
 	
 }

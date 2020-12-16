@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -30,8 +31,11 @@ public class Job implements Serializable {
 	
 	private double restCost;
 	
+	@Lob
 	private String description;
 
+	private boolean erase;
+	
 	public long getId() {
 		return id;
 	}
@@ -86,6 +90,14 @@ public class Job implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isErase() {
+		return erase;
+	}
+
+	public void setErase(boolean erase) {
+		this.erase = erase;
 	}
 	
 }

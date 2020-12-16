@@ -25,8 +25,8 @@ public class MaterialService {
 	}
 	
 	public void delete (Material material) {
-		Material mtr = findByID(material.getId());
-		materialRepository.delete(mtr);
+		material.setErase(true);
+		materialRepository.update(material);
 	}
 	
 	public Material findByID (long id) {

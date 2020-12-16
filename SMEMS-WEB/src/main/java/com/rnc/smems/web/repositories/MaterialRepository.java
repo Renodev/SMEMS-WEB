@@ -33,7 +33,7 @@ public class MaterialRepository {
 	}
 	
 	public List<Material>  findAll () {
-		String str = "select t from %s t";
+		String str = "select t from %s t where t.erase = false";
 		String sql = String.format(str, Material.class.getSimpleName());
 		TypedQuery<Material> query = entityManager.createQuery(sql, Material.class);
 		return query.getResultList();
