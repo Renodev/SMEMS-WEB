@@ -25,8 +25,8 @@ public class AccountRepository {
 		entityManager.remove(account);
 	}
 	
-	public Account findByID (String id) {
-		String str = "select t from %s t where t.id = '"+id+"'";
+	public Account findByID (long id) {
+		String str = "select t from %s t where t.id = "+id+"";
 		String sql = String.format(str, Account.class.getSimpleName());
 		TypedQuery<Account> query = entityManager.createQuery(sql, Account.class);
 		return query.getSingleResult();

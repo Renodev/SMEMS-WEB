@@ -7,10 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 
 @Entity
-public class Job implements Serializable {
+public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,18 +19,19 @@ public class Job implements Serializable {
 	private long id;
 	
 	private LocalDate date;
+
+	private String name;
 	
-	@ManyToOne
-	private Product product;
+	private double cost;
 	
-	@ManyToOne
-	private Customer customer;
+	private double profit;
 	
-	private double deposit;
+	private double price;
 	
-	private double restCost;
-	
+	@Lob
 	private String description;
+
+	private boolean erase;
 
 	public long getId() {
 		return id;
@@ -48,36 +49,36 @@ public class Job implements Serializable {
 		this.date = date;
 	}
 
-	public Product getProduct() {
-		return product;
+	public String getName() {
+		return name;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public double getCost() {
+		return cost;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 
-	public double getDeposit() {
-		return deposit;
+	public double getProfit() {
+		return profit;
 	}
 
-	public void setDeposit(double deposit) {
-		this.deposit = deposit;
+	public void setProfit(double profit) {
+		this.profit = profit;
 	}
 
-	public double getRestCost() {
-		return restCost;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setRestCost(double restCost) {
-		this.restCost = restCost;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public String getDescription() {
@@ -86,6 +87,14 @@ public class Job implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isErase() {
+		return erase;
+	}
+
+	public void setErase(boolean erase) {
+		this.erase = erase;
 	}
 	
 }

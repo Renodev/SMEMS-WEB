@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Job implements Serializable {
+public class Ingredient implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,18 +20,19 @@ public class Job implements Serializable {
 	private long id;
 	
 	private LocalDate date;
-	
+
 	@ManyToOne
 	private Product product;
 	
 	@ManyToOne
-	private Customer customer;
+	private Material material;
 	
-	private double deposit;
+	private long quantity;
 	
-	private double restCost;
-	
+	@Lob
 	private String description;
+
+	private boolean erase;
 
 	public long getId() {
 		return id;
@@ -56,28 +58,20 @@ public class Job implements Serializable {
 		this.product = product;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Material getMaterial() {
+		return material;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setMaterial(Material material) {
+		this.material = material;
 	}
 
-	public double getDeposit() {
-		return deposit;
+	public long getQuantity() {
+		return quantity;
 	}
 
-	public void setDeposit(double deposit) {
-		this.deposit = deposit;
-	}
-
-	public double getRestCost() {
-		return restCost;
-	}
-
-	public void setRestCost(double restCost) {
-		this.restCost = restCost;
+	public void setQuantity(long quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getDescription() {
@@ -86,6 +80,14 @@ public class Job implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isErase() {
+		return erase;
+	}
+
+	public void setErase(boolean erase) {
+		this.erase = erase;
 	}
 	
 }

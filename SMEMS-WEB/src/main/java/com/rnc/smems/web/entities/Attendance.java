@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Job implements Serializable {
+public class Attendance implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,18 +19,14 @@ public class Job implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private LocalDate date;
+	private LocalDate Date;
 	
 	@ManyToOne
-	private Product product;
+	private Staff staff;
 	
-	@ManyToOne
-	private Customer customer;
+	private boolean present;
 	
-	private double deposit;
-	
-	private double restCost;
-	
+	@Lob
 	private String description;
 
 	public long getId() {
@@ -41,43 +38,27 @@ public class Job implements Serializable {
 	}
 
 	public LocalDate getDate() {
-		return date;
+		return Date;
 	}
 
 	public void setDate(LocalDate date) {
-		this.date = date;
+		Date = date;
 	}
 
-	public Product getProduct() {
-		return product;
+	public Staff getStaff() {
+		return staff;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public boolean isPresent() {
+		return present;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public double getDeposit() {
-		return deposit;
-	}
-
-	public void setDeposit(double deposit) {
-		this.deposit = deposit;
-	}
-
-	public double getRestCost() {
-		return restCost;
-	}
-
-	public void setRestCost(double restCost) {
-		this.restCost = restCost;
+	public void setPresent(boolean present) {
+		this.present = present;
 	}
 
 	public String getDescription() {
@@ -87,5 +68,5 @@ public class Job implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 }

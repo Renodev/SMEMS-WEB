@@ -1,19 +1,16 @@
 package com.rnc.smems.web.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-import com.rnc.smems.web.enums.accountRole;
-
 @Entity
-public class Account implements Serializable{
+public class Customer implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,21 +18,18 @@ public class Account implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	private LocalDate date;
+	
 	private String name;
 	
 	private String phone;
 	
 	private String email;
 	
-	private String username;
-	
-	private String password;
+	private String companyName;
 	
 	@Lob
 	private String address;
-	
-	@Enumerated(EnumType.STRING)
-	private accountRole accountRole;
 	
 	private boolean erase;
 
@@ -45,6 +39,14 @@ public class Account implements Serializable{
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 	public String getName() {
@@ -71,20 +73,12 @@ public class Account implements Serializable{
 		this.email = email;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public String getAddress() {
@@ -103,12 +97,4 @@ public class Account implements Serializable{
 		this.erase = erase;
 	}
 
-	public accountRole getAccountRole() {
-		return accountRole;
-	}
-
-	public void setAccountRole(accountRole accountRole) {
-		this.accountRole = accountRole;
-	}
-	
 }

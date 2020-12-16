@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Job implements Serializable {
+public class EarlyPay implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,15 +22,11 @@ public class Job implements Serializable {
 	private LocalDate date;
 	
 	@ManyToOne
-	private Product product;
+	private Staff staff;
 	
-	@ManyToOne
-	private Customer customer;
+	private double amount;
 	
-	private double deposit;
-	
-	private double restCost;
-	
+	@Lob
 	private String description;
 
 	public long getId() {
@@ -48,36 +45,20 @@ public class Job implements Serializable {
 		this.date = date;
 	}
 
-	public Product getProduct() {
-		return product;
+	public Staff getStaff() {
+		return staff;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public double getAmount() {
+		return amount;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public double getDeposit() {
-		return deposit;
-	}
-
-	public void setDeposit(double deposit) {
-		this.deposit = deposit;
-	}
-
-	public double getRestCost() {
-		return restCost;
-	}
-
-	public void setRestCost(double restCost) {
-		this.restCost = restCost;
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 
 	public String getDescription() {

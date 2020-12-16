@@ -48,7 +48,7 @@
 					<li class="nav-item">
 						<a class="nav-link" href="overTime.xhtml"><i class="fa fa-clock-o" /> Overtimes </a>
 					</li>
-					<li class="nav-item ">
+					<li class="nav-item">
 						<a class="nav-link" href="product.xhtml"><i class="fa fa-cubes" /> Products</a>
 					</li>
 					<li class="nav-item">
@@ -57,13 +57,13 @@
 					<li class="nav-item">
 						<a class="nav-link" href="inStock.xhtml"><i class="fa fa-list" /> InStocks</a>
 					</li>
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="warehouse.xhtml"><i class="fa fa-database" /> Warehouse</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="job.xhtml"><i class="fa fa-suitcase" /> Jobs </a>
 					</li>
-					<li class="nav-item ">
+					<li class="nav-item active">
 						<a class="nav-link" href="earlyPay.xhtml"><i class="fa fa-dollar" /> Early Pay </a>
 					</li>
 					<li class="nav-item">
@@ -73,23 +73,7 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid row p-4">
-		<ui:repeat var="m" value="#{warehouseBean.materials}">
-			<div class="col-3">
-				<div class="row text-light mb-2">
-					<div class="col-2">
-						<h:commandLink styleClass="btn btn-danger btn-lg">
-							<i class="fa fa-cog" />
-						</h:commandLink>
-					</div>  
-					<div class="col-8" style="line-height: 16px;">
-						<p class="font-weight-bold" style="font-size: 16px;"> #{warehouseBean.generateQuantity(m)} Packs </p>
-						<p class="" style="font-size: 14px;">#{m.name}</p>
-					</div>
-				</div>
-			</div>
-		</ui:repeat>
-	</div>
+
 </h:form>
 </body> 
 </html>

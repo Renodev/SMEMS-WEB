@@ -1,6 +1,5 @@
 package com.rnc.smems.web.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -18,8 +17,7 @@ public class AccountService {
 	private AccountRepository accountRepository;
 	
 	public void save (Account account) {
-		if (account.getId() == null) {
-			account.setId(LocalDateTime.now().toString());
+		if (account.getId() == 0) {
 			accountRepository.save(account);
 		} else {
 			accountRepository.update(account);
@@ -31,7 +29,7 @@ public class AccountService {
 		accountRepository.delete(acc);
 	}
 	
-	public Account findByID (String id) {
+	public Account findByID (long id) {
 		return accountRepository.findByID(id);
 	}
 	
