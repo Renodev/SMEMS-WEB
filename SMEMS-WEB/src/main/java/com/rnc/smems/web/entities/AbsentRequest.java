@@ -29,7 +29,7 @@ public class AbsentRequest implements Serializable {
 	@Lob
 	private String description;
 	
-	private String offDay;
+	private long offDay;
 
 	private boolean erase;
 	
@@ -73,14 +73,15 @@ public class AbsentRequest implements Serializable {
 		this.description = description;
 	}
 	
-	public String getOffDay() {
+	
+	public long getOffDay() {
 		return offDay;
 	}
 
-	public void setOffDay(String offDay) {
+	public void setOffDay(long offDay) {
 		this.offDay = offDay;
 	}
-	
+
 	public boolean isErase() {
 		return erase;
 	}
