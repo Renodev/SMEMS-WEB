@@ -23,9 +23,7 @@ import com.rnc.smems.web.services.BudgetService;
 @ViewScoped
 public class ConfigBudgetBean implements Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private Budget budget;
