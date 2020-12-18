@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+/* @Ye Ko Ko
+ * 18.12.2020
+ */
+
+
 @Entity
 public class Customer implements Serializable{
 

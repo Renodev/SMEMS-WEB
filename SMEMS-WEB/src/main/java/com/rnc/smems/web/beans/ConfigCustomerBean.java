@@ -11,6 +11,10 @@ import javax.inject.Named;
 import com.rnc.smems.web.entities.Customer;
 
 import com.rnc.smems.web.services.CustomerService;
+/* @Ye Ko Ko
+ * 18.12.2020
+ */
+
 @Named
 @ViewScoped
 public class ConfigCustomerBean implements Serializable{

@@ -9,6 +9,12 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.rnc.smems.web.entities.Customer;
 import com.rnc.smems.web.repositories.CustomerRepository;
+
+/* @Ye Ko Ko
+ * 18.12.2020
+ */
+
+
 @LocalBean
 @Stateless
 public class CustomerService {

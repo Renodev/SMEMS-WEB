@@ -8,6 +8,11 @@ import javax.persistence.TypedQuery;
 import com.rnc.smems.web.entities.Customer;
 
 
+/* @Ye Ko Ko
+ * 18.12.2020
+ */
+
+
 public class CustomerRepository {
 	@PersistenceContext
 	private EntityManager entityManager;
