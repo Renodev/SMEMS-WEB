@@ -13,6 +13,12 @@ import com.rnc.smems.web.enums.BudgetStatus;
 import com.rnc.smems.web.services.BudgetService;
 
 
+/**
+ * @author Yadanar Myint Maw
+ * @since 18-12-2020
+ *  
+ *  */
+
 @Named
 @ViewScoped
 public class ConfigBudgetBean implements Serializable {

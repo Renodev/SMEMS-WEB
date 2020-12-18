@@ -9,7 +9,11 @@ import javax.persistence.TypedQuery;
 import com.rnc.smems.web.entities.Budget;
 import com.rnc.smems.web.entities.InStock;
 
-
+/**
+ * @author Yadanar Myint Maw
+ * @since 18-12-2020
+ *  
+ *  */
 
 public class BudgetRepository {
 
