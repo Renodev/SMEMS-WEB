@@ -12,7 +12,6 @@ import com.rnc.smems.web.entities.Budget;
 import com.rnc.smems.web.enums.BudgetStatus;
 import com.rnc.smems.web.services.BudgetService;
 
-
 /**
  * @author Yadanar Myint Maw
  * @since 18-12-2020
@@ -22,7 +21,6 @@ import com.rnc.smems.web.services.BudgetService;
 @Named
 @ViewScoped
 public class ConfigBudgetBean implements Serializable {
-
 
 	private static final long serialVersionUID = 1L;
 
@@ -56,8 +54,8 @@ public class ConfigBudgetBean implements Serializable {
 		initialize();
 	}
 	
-	public String generateStockColor (BudgetStatus budgetStatus) {
-		if ( (budgetStatus.equals(BudgetStatus.Salary_OutCome)) && (budgetStatus.equals(BudgetStatus.Sharer_OutCome)) ) {
+	public String generateStopColor(BudgetStatus budgetStatus) {
+		if ( (budgetStatus.equals(BudgetStatus.Investment_InCome)) || (budgetStatus.equals(BudgetStatus.Job_Income)) ) {
 			return "text-primary";
 		} else{
 			return "text-danger";
@@ -87,6 +85,4 @@ public class ConfigBudgetBean implements Serializable {
 	public void setStatuses(BudgetStatus[] statuses) {
 		this.statuses = statuses;
 	}
-	
-	
 }

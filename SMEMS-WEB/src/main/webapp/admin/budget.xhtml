@@ -126,7 +126,8 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header"><span class="text-secondary">Status</span></f:facet>
-				#{b.budgetStatus}
+				<span class="#{configBudgetBean.generateStopColor(b.budgetStatus)}">#{b.budgetStatus}</span>
+				
 			</h:column>
 			<h:column>
 				<f:facet name="header"><span class="text-secondary">Description</span></f:facet>
@@ -152,4 +153,3 @@
 </h:form>
 </body> 
 </html>
-

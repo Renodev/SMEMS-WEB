@@ -18,7 +18,6 @@ import com.rnc.smems.web.repositories.BudgetRepository;
  * 
  *  */
 
-
 @LocalBean
 @Stateless
 public class BudgetService {
@@ -32,7 +31,7 @@ public class BudgetService {
 			budgetRepository.save(budget);
 		}
 		else {
-			update(budget);
+			budgetRepository.update(budget);
 		}
 	}
 	
@@ -41,8 +40,8 @@ public class BudgetService {
 	}
 	
 	public void delete (Budget budget) {
-		Budget bgt = findByID(budget.getId());
-		budgetRepository.delete(bgt);
+		budget.setErase(true);
+		update(budget);
 	}
 	
 	public Budget findByID (long id) {
