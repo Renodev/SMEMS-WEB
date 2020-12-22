@@ -73,88 +73,76 @@
 			</div>
 		</div>
 	</nav>
-	<fieldset style="background-color:#5E7D7E; border:2px groove white; width:97%; margin-left:auto; margin-right:auto;">
-		<legend style="margin-left: 50px; border:none; width:20%; color:#ece5b6;padding:4px 10px;">
-			<span style="font-family: Gabriola; font-size:30px">Absent Request Form</span>
-		</legend>
-	
 	<div class="container-fluid text-light">
 		<div class="row mt-3 mb-2">
 			<div class="col-6 row">
-				
-		  		<div class="form-group col-6">
-		  			
-		  			<i class="fa fa-user" aria-hidden="true" style="font-size: 17px; color:#151B54;"></i> <span style="color:black;">  Staff</span>
-		  			<h:selectOneMenu value="#{configAbsentRequestBean.absentRequest.staff}" converter="#{staffConverter}" styleClass="btn btn-outline-muted form-control rounded-pill" style="height: 35px;color:#0c090a;border-bottom:0.5px solid black;">
-		  			<f:selectItems value="#{configAbsentRequestBean.staffs}" var="s" itemValue="#{s}" itemLabel="#{s.name}"></f:selectItems>
+				<div class="form-group col-6">
+		  			<span>Staff</span>
+		  			<h:selectOneMenu value="#{configAbsentRequestBean.absentRequest.staff}" converter="#{staffConverter}" styleClass="form-control" style="height: 30px;">
+		  				<f:selectItems value="#{configAbsentRequestBean.staffs}" var="s" itemValue="#{s}" itemLabel="#{s.name}"></f:selectItems>
 		  			</h:selectOneMenu>
 		  		</div>
 		  		<div class="form-group col-6">
-		  			<i class="fa fa-calendar" aria-hidden="true" style="font-size: 17px; color:#151B54;"></i> <span style="color:black;">  Datefrom</span>
-		  			<h:inputText value="#{configAbsentRequestBean.absentRequest.dateFrom}" converter="#{localDateConverter}" p:type="date" styleClass="btn btn-outline-muted form-control rounded-pill" style="height: 35px;color:#0c090a; border-bottom:0.5px solid black;" />
+		  			<span>DateFrom</span>
+		  			<h:inputText value="#{configAbsentRequestBean.absentRequest.dateFrom}" converter="#{localDateConverter}" p:type="date" styleClass="form-control" style="height: 30px;" />
+		  				
+		  		</div>
+		  		<div class="form-group col-6">
+		  			<span>Offday</span>
+		  			<h:inputText value="#{configAbsentRequestBean.absentRequest.offDay}" styleClass="form-control" style="height: 30px;" />
+		  		</div>
+		  		<div class="form-group col-6">
+		  			<span>DateTo</span>
+		  			<h:inputText value="#{configAbsentRequestBean.absentRequest.dateTo}" converter="#{localDateConverter}" p:type="date" styleClass="form-control" style="height: 30px;" />
 		  		</div>
 		  		
-		  		<div class="form-group col-6">
-		  			<i class="fa fa-minus-square" aria-hidden="true" style="font-size: 17px; color:#151B54;"></i><span style="color:black;">  Offday</span>
-		  			<h:inputText p:type="number" p:min="0"  value="#{configAbsentRequestBean.absentRequest.offDay}" styleClass="btn btn-outline-muted form-control rounded-pill" style="height: 35px;color:#0c090a;border-bottom:0.5px solid black;" />
-		  		</div>
-		  		<div class="form-group col-6">
-		  			<i class="fa fa-calendar" aria-hidden="true" style="font-size: 17px; color:#151B54;"></i> <span style="color:black;">  DateTo</span>
-		  			<h:inputText value="#{configAbsentRequestBean.absentRequest.dateTo}" converter="#{localDateConverter}" p:type="date" styleClass="btn btn-outline-muted form-control rounded-pill" style="height: 35px;color:#0c090a;border-bottom:0.5px solid black;" />
-		  		</div>
 			</div>
 			<div class="col-6">
 				<div class="form-group">
-		  			<i class="fa fa-comment" aria-hidden="true" style="font-size: 17px; color:#151B54;"></i><span style="color:black;">  Description</span>
-		  			<h:inputTextarea value="#{configAbsentRequestBean.absentRequest.description}" styleClass="btn btn-outline-muted form-control rounded-pill" style="height: 70px;color:#0c090a;border:0.5px solid black;" />
+		  			<span> Description </span>
+		  			<h:inputTextarea value="#{configAbsentRequestBean.absentRequest.description}" styleClass="form-control" style="height: 60px;" />
 		  		</div>
-		  		<div class="row mt-1">
+		  		<div class="row">
 		  			<div class="form-group col-6">
 		  				
-		  				<h:commandLink action="#{configAbsentRequestBean.initialize()}" styleClass="btn btn-sm btn-outline-danger rounded-pill form-control" style="height: 28px;">
-		  					<i class="fa fa-refresh" />Refresh
+		  				<h:commandLink action="#{configAbsentRequestBean.initialize()}" styleClass="btn btn-sm btn-danger form-control" style="height: 30px;">
+		  					<i class="fa fa-refresh" /> Refresh
 		  				</h:commandLink>
 		  			</div>
 		  			<div class="form-group col-6">
 		  				
-		  				<h:commandLink action="#{configAbsentRequestBean.save()}" styleClass="btn btn-sm btn-outline-success rounded-pill form-control" style="height: 28px;">
-							<i class="fa fa-check" />  Save 					
+		  				<h:commandLink action="#{configAbsentRequestBean.save()}" styleClass="btn btn-sm btn-success form-control" style="height: 30px;">
+							<i class="fa fa-check" /> Save		  					
 		  				</h:commandLink>
 		  			</div>
 		  		</div>
 			</div>
 		</div>
-	</div>
-	</fieldset>
-	
-	<br/>
-	<br/>
-	<h:dataTable value="#{configAbsentRequestBean.absentRequests}" var="ab" style="border:none; font-size: 13px; color:white; width:97%; margin-left:auto; margin-right:auto;" styleClass="table table-sm table-borderless">
+		<h:dataTable style="font-size: 12px;" value="#{configAbsentRequestBean.absentRequests}" var="ab" styleClass="table text-light">
 			<h:column>
-				<f:facet name="header"><span style="font-family: Gabriola;color:#5E7D7E; font-size: 25px;">ID</span></f:facet>
+				<f:facet name="header"><span class="text-secondary">ID</span></f:facet>
 				#{ab.id}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span style="font-family: Gabriola;color:#5E7D7E; font-size: 25px; ">Staff</span></f:facet>
+				<f:facet name="header"><span class="text-secondary">Staff</span></f:facet>
 				#{ab.staff.name}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span style="font-family: Gabriola;color:#5E7D7E; font-size: 25px;">DateFrom</span></f:facet>
+				<f:facet name="header"><span class="text-secondary">DateFrom</span></f:facet>
 				#{ab.dateFrom}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span style="font-family: Gabriola;color:#5E7D7E; font-size: 25px;">DateTo</span></f:facet>
+				<f:facet name="header"><span class="text-secondary">DateTo</span></f:facet>
 				#{ab.dateTo}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span style="font-family: Gabriola;color:#5E7D7E; font-size: 25px;">OffDay</span></f:facet>
+				<f:facet name="header"><span class="text-secondary">Offday</span></f:facet>
 				#{ab.offDay}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span style="font-family: Gabriola;color:#5E7D7E; font-size: 25px;">Description</span></f:facet>
+				<f:facet name="header"><span class="text-secondary">Description</span></f:facet>
 				#{ab.description}
 			</h:column>
-			
 			<h:column>
 				<h:commandLink action="#{configAbsentRequestBean.update(ab)}" styleClass="btn btn-sm btn-primary">
 					<i class="fa fa-pencil" />
@@ -166,6 +154,8 @@
 				</h:commandLink>
 			</h:column>
 		</h:dataTable>
+		
+	</div>
 	
 </h:form>
 </body> 

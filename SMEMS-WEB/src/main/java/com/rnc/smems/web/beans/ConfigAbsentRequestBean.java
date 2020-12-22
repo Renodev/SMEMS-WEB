@@ -3,7 +3,6 @@ package com.rnc.smems.web.beans;
 
 import java.io.Serializable;
 
-
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -46,8 +45,6 @@ public class ConfigAbsentRequestBean implements Serializable{
 		absentRequest = new AbsentRequest();
 		absentRequests = absentRequestService.findAll();
 		staffs = staffService.findAll();
-		
-		
 	}
 	
 	public void save() {

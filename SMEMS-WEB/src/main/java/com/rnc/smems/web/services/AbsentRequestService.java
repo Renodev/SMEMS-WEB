@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.rnc.smems.web.entities.AbsentRequest;
-import com.rnc.smems.web.repositories.AbsentRequestRepositories;
+import com.rnc.smems.web.repositories.AbsentRequestRepository;
 
 /**
  * 
@@ -21,7 +21,7 @@ import com.rnc.smems.web.repositories.AbsentRequestRepositories;
 public class AbsentRequestService {
 	
 	@Inject
-	private AbsentRequestRepositories absentRequestRepositories;
+	private AbsentRequestRepository absentRequestRepositories;
 	
 	public void save(AbsentRequest absentRequest) {
 		if(absentRequest.getId() == 0) {
@@ -31,8 +31,9 @@ public class AbsentRequestService {
 	}
 	
 	public void delete(AbsentRequest absentRequest) {
-		AbsentRequest absentReq = findById(absentRequest.getId());
-		absentRequestRepositories.delete(absentReq);
+		absentRequest.setErase(true);
+		absentRequestRepositories.update(absentRequest);
+		
 	}
 	
 	public AbsentRequest findById(long id) {
