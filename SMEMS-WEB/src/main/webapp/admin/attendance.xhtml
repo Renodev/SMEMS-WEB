@@ -7,7 +7,7 @@
 
 <h:head>
 
-	<title>SMEMS | Admin | Account Configuration</title>
+	<title>SMEMS | Admin | Attendance Configuration</title>
 
 	<link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 	
@@ -73,6 +73,41 @@
 			</div>
 		</div>
 	</nav>
+	<div class="container-fluid">
+		<div class="row p-2 m-2">
+			<div class="col-2">
+				<h6 class="text-light p-1" style="background-color: #dc3545; height: 30px;">Date: #{configAttendanceBean.date}</h6>
+			</div>
+			<div class="col-7"></div>
+			<div class="col-3">
+				<h:commandLink action="#{configAttendanceBean.update()}" styleClass="btn btn-primary btn-sm form-control" value="Update" style="height: 30px;" />
+			</div>	
+		</div>
+		<div class="row">
+			<div class="col-1 ml-5">
+				<h6 class="text-light">Staffs</h6>
+			</div>
+			<div class="col-1 ml-5">
+				<h6 class="text-light">Attendance</h6>
+			</div>
+			<div class="col-8 ml-4">
+				<h6 class="text-light">Description</h6>
+			</div>
+		</div>
+		<ui:repeat var="a" value="#{configAttendanceBean.attendances}">
+			<div class="row p-2 border-bottom border-secondary m-2">
+				<div class="col-2 text-light">
+				#{a.staff.name}
+				</div>
+				<div class="col-1">
+					<h:selectBooleanCheckbox value="#{a.present}" />
+				</div>
+				<div class="col-9">
+					<h:inputText value="#{a.description}" styleClass="form-control" style="height: 28px;"/>
+				</div>
+			</div>
+		</ui:repeat>
+	</div>
 
 </h:form>
 </body> 

@@ -19,7 +19,6 @@ public class AttendanceService {
 	
 	public void save(Attendance attendance) {
 		if(attendance.getId() == 0) {
-			attendance.setDate(LocalDate.now());
 			attendanceRepository.save(attendance);
 		} else {
 			update(attendance);
@@ -37,6 +36,10 @@ public class AttendanceService {
 	
 	public Attendance findByID(long id) {
 		return attendanceRepository.findByID(id);
+	}
+	
+	public List<Attendance> findByDate(LocalDate date){
+		return attendanceRepository.findByDate(date);
 	}
 	
 	public List<Attendance> findAll(){

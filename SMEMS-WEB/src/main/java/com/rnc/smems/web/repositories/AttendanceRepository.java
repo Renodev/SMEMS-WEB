@@ -1,5 +1,6 @@
 package com.rnc.smems.web.repositories;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,7 +24,6 @@ public class AttendanceRepository {
 	
 	public void delete(Attendance attendance) {
 		entityManager.remove(attendance);
-		
 	}
 	
 	public Attendance findByID(long id) {
@@ -33,11 +33,17 @@ public class AttendanceRepository {
 		return query.getSingleResult();
 	}
 	
-	public List<Attendance> findAll(){
+	public List<Attendance> findByDate (LocalDate date) {
+		String str = "select t from %s t where t.Date = '"+date.toString()+"'";
+		String sql = String.format(str, Attendance.class.getSimpleName());
+		TypedQuery<Attendance> query = entityManager.createQuery(sql, Attendance.class);
+		return query.getResultList();
+	}
+	
+	public List<Attendance> findAll() {
 		String str = "select t from %s t";
 		String sql = String.format(str, Attendance.class.getSimpleName());
 		TypedQuery<Attendance> query = entityManager.createQuery(sql, Attendance.class);
 		return query.getResultList();
 	}
-
 }
