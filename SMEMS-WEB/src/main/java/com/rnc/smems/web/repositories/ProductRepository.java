@@ -36,12 +36,15 @@ public class ProductRepository {
 		return query.getSingleResult();
 	}
 	
-	public List<Product> findAll () {
-		String str = "select t from %s t";
+	public List<Product>  findAll () {
+		String str = "select t from %s t where t.erase = false";
 		String sql = String.format(str, Product.class.getSimpleName());
 		TypedQuery<Product> query = entityManager.createQuery(sql, Product.class);
 		return query.getResultList();
 	}
+	
+	
+	
 	
 	
 	

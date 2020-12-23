@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.rnc.smems.web.entities.Account;
 import com.rnc.smems.web.entities.InStock;
 import com.rnc.smems.web.entities.Material;
 import com.rnc.smems.web.entities.Product;
@@ -38,6 +39,12 @@ public class ProductService {
 	public Product findByID (long id) {
 		return productRepository.findByID(id);
 	}
+	
+	
+	
+	
+	
+	
 	
 	public List<Product> findAll () {
 		return productRepository.findAll();

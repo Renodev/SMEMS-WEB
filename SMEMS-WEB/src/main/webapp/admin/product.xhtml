@@ -18,7 +18,7 @@
 	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
 	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
 	<h:outputScript library="js" name="popper.min.js"></h:outputScript>
-	
+
 	<style>
 		h4,h5,p{margin-left:5%}
 	</style>
@@ -184,6 +184,17 @@
 				<f:facet name="header">Description</f:facet>
 				#{p.description}
 			</h:column>
+			<h:column>
+				<h:commandLink action="#{configProductBean.update(p)}" styleClass="btn btn-sm btn-primary">
+					<i class="fa fa-pencil" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
+				<h:commandLink action="#{configProductBean.delete(p)}" styleClass="btn btn-sm btn-danger">
+					<i class="fa fa-remove" />
+				</h:commandLink>
+			</h:column>
+			
 		</h:dataTable>
 	</div>
 				
