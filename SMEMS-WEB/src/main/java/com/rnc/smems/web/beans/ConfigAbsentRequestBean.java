@@ -2,8 +2,11 @@ package com.rnc.smems.web.beans;
 
 
 import java.io.Serializable;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -45,6 +48,26 @@ public class ConfigAbsentRequestBean implements Serializable{
 		absentRequest = new AbsentRequest();
 		absentRequests = absentRequestService.findAll();
 		staffs = staffService.findAll();
+	}
+	
+	public void generateOffDay () {
+		if (absentRequest.getDateFrom() != null && absentRequest.getDateTo() != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			try {
+				String s1 = absentRequest.getDateFrom().toString();
+				String s2 = absentRequest.getDateTo().toString();
+				String str1 = s1.substring(8, 10) + s1.substring(4, 8) + s1.substring(0, 4) + " 00:00:00";
+				String str2 = s2.substring(8, 10) + s2.substring(4, 8) + s2.substring(0, 4) + " 00:00:00";
+				Date dateFrom = sdf.parse(str1);
+				Date dateTo = sdf.parse(str2);
+				long difference_In_Time = dateFrom.getTime() - dateTo.getTime(); 
+				long difference_In_Days = TimeUnit.MILLISECONDS.toDays(difference_In_Time) 
+                  % 365;
+            absentRequest.setOffDay(~(difference_In_Days - 1));
+			} catch (ParseException e) {
+
+			}
+		}
 	}
 	
 	public void save() {
