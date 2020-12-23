@@ -42,8 +42,20 @@ public class ConfigAttendanceBean implements Serializable {
 				attendance.setStaff(staff);
 				attendanceService.save(attendance);
 			}
-			attendances = attendanceService.findByDate(date);
+		} else {
+			staff : for (Staff staff : staffs) {
+				for (Attendance attendance : attendances) {
+					if (staff.equals(attendance.getStaff())) {
+						continue staff;
+					}
+				}
+				Attendance attendance = new Attendance();
+				attendance.setDate(LocalDate.now());
+				attendance.setStaff(staff);
+				attendanceService.save(attendance);
+			}
 		}
+		attendances = attendanceService.findByDate(date);
 	}
 	
 	public void update () {

@@ -79,134 +79,113 @@
 	</nav>
 	
 	
-		<div class="text-light">
-			
-				<div class="row ml-5 mt-3">
-					<div class="col-5 mr-4">
-						<div class="form-group" >
-		  				<span>Product Name</span>
-		  				<h:inputText value="#{ingredientsBean.product.name}" style="height: 30px;" styleClass="form-control mt-2"/>
-		  			</div>
-		  			
-		  			
-		  		<div class="form-groupborder-dark" >
-		  			<h5 class="text-center">Ingredients</h5>
-		  			<div class="row">
-		  				<div class="col-8 form-group">
-			  				<span>Material Name</span>
-			  				<h:selectOneMenu value="#{ingredientsBean.ingredient.material}" converter="#{materialConverter}" styleClass="form-control" style="height: 30px;">
-			  					<f:selectItems value="#{ingredientsBean.materials}" var="m" itemValue="#{m}" itemLabel="#{m.name}"></f:selectItems>
+	<div class="container-fluid mt-3">
+		<div class="row text-light">
+			<div class="col-12">
+				<div class="row">
+					<div class="col-6 form-group">
+						<span>Name</span>
+						<h:inputText value="#{configProductBean.product.name}" styleClass="form-control" style="height: 30px;" />
+					</div>
+					<div class="col-6 form-group">
+						<span>Profit</span>
+						<h:inputText value="#{configProductBean.product.profit}" styleClass="form-control" style="height: 30px;" />
+					</div>
+					<div class="col-6">
+						<span>Material</span>
+					</div>
+					<div class="col-2">
+						<span>Quantity</span>
+					</div>
+					<div class="col-2">
+						<span>-</span>
+					</div>
+					<div class="col-2">
+						<span>-</span>
+					</div>
+					<ui:repeat var="i" value="#{configProductBean.ingredients}">
+						<div class="col-6 mt-1 mb-1">
+							<h:selectOneMenu value="#{i.material}" converter="#{materialConverter}" styleClass="form-control" style="height: 30px;">
+			  					<f:selectItems value="#{configProductBean.materials}" var="m" itemValue="#{m}" itemLabel="#{m.name}" />
 			  				</h:selectOneMenu>
-		  				</div>
-					  	<div class="col-4">
-					  		<span>Quantity</span>
-					  		<h:inputText value="#{ingredientsBean.ingredient.quantity}" styleClass="form-control" style="height: 30px; max-width:100%"/>
-					  	</div>
+						</div>
+						<div class="col-2 mt-1 mb-1">
+							<h:inputText value="#{i.quantity}" styleClass="form-control" style="height: 30px;" />
+						</div>
+						<div class="col-2 mt-1 mb-1">
+							<h:commandLink action="#{configProductBean.add()}" styleClass="btn btn-sm btn-primary form-control" style="height: 30px;">
+								<i class="fa fa-plus" />
+							</h:commandLink>
+						</div>
+						<div class="col-2 mt-1 mb-1">
+							<h:commandLink action="#{configProductBean.remove(i)}" styleClass="btn btn-sm btn-danger form-control" style="height: 30px;">
+								<i class="fa fa-remove" />
+							</h:commandLink>
+						</div>
+					</ui:repeat>
+					<div class="col-12">
+						<div class="row">
+							<div class="col-6 form-group">
+							<span>Description</span>
+							<h:inputTextarea value="#{configProductBean.product.description}" styleClass="form-control" style="height: 100px;" />
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<span>-</span>
+								<h:commandLink action="#{configProductBean.initialize()}" styleClass="btn btn-sm btn-danger form-control" style="height: 30px;">
+									<i class="fa fa-refresh" /> Refresh
+								</h:commandLink>
+							</div>
+							<div class="form-group">
+								<span>-</span>
+								<h:commandLink action="#{configProductBean.save()}" styleClass="btn btn-sm btn-primary form-control" style="height: 30px;">
+									<i class="fa fa-check" /> Save
+								</h:commandLink>
+							</div>
+						</div>
+						</div>
 					</div>
-				
-		  		<h:commandLink action="#{ingredientsBean.Add()}" style="width:20%; margin-left:58%" styleClass="mt-1 mb-3 btn btn-warning btn-sm">Cancel</h:commandLink>
-		  		<h:commandLink action="#{ingredientsBean.Add()}" style="width:20%;" styleClass="mt-1 mb-3 btn btn-warning btn-sm ml-1 ">Add</h:commandLink>
-		  		<p class="text-dark">Total Cost - #{ingredientsBean.totalCost} Ks </p>
-		  	</div>
-		  	
-		  	</div>
-		  	
-		  	
-		  	<div class="col-5 mr-3 ml-5">
-		  	<div class="form-group" >
-		  		<span>Profit</span>
-		  		<h:inputText value="#{ingredientsBean.product.profit}" style="height: 30px;" styleClass="form-control mt-2"/>
-		  	</div>
-		  	<p class="text-dark">Price - #{ingredientsBean.product.price} Ks </p>
-		  	<div class="form-group" >
-		  		<span>Description</span>
-		  		<h:inputText value="#{ingredientsBean.product.description}" style="height: 80px;" styleClass="form-control"/>
-		  	</div>
-		  	<h:commandLink action="#" styleClass="btn btn-danger " style="width:40%">Cancel</h:commandLink>
-		  	<h:commandLink action="#{ingredientsBean.save()}" styleClass="btn btn-success  ml-2 " style="width:41%">Save</h:commandLink>
-		</div>
-	</div>
-	</div>
-
-	<div class="row ml-5 mt-2  mr-2 shadow p-1 border border-secondary text-light">
+				</div>
+			</div>
 			
-				<div class="col-3">
-				  	<div class="border-right mt-3 ml-1">
-					    <h5 class="card-title">#{ingredientsBean.product.name}</h5>
-					    <h4> #{ingredientsBean.product.price}Ks </h4>
-					    <p class="text-secondary"> Profit -#{ingredientsBean.product.profit}Ks </p>		
-						<h:commandLink action = "#"  styleClass="btn btn-primary btn-sm mb-3" style="margin-left:40%;">Update</h:commandLink>
-						<h:commandLink action = "#"  styleClass="btn btn-danger btn-sm ml-3 mb-3" style="margin-left:40%;">Delete</h:commandLink>
-					</div>	
-					<p></p>
-				</div>
-						
-				<div class="col-8">
-					<p class="text-center text-secondary"> Ingredients </p>
-				  	<div class="row">	
-						<ui:repeat var="m" value="#{ingredientsBean.ingredients}">
-							<div class="col-2 mt-1">
-								<div class="shadow p-1 border border-secondary text-light">
-									<div class="text-center">
-										<h5> #{m.material.name}</h5>
-										<p>#{m.quantity} Packs </p>
-									</div>
-									<div class="text-center">
-										<h:commandLink styleClass="text-primary mr-1" action="#{ingredientsBean.update(m)}">
-											<i class="fa fa-pencil" />
-										</h:commandLink>
-										<h:commandLink styleClass="text-danger ml-1" action="#{ingredientsBean.remove(m)}">
-											<i class="fa fa-remove" />
-										</h:commandLink>
-									</div>
-								</div>
-							</div>
-						</ui:repeat>
-					</div>	
-				</div>	
-				
 		</div>
-		
-		
-			<ui:repeat var="m" value="#{ingredientsBean.products}">
-				<div class="row mt-3 shadow p-1 border border-secondary text-light ml-5 mr-2">
-				<div class="col-3">
-				  	<div class="border-right mt-3 ml-1">
-					    <h5 class="card-title">#{m.name}</h5>
-					    <h4> #{m.price}Ks </h4>
-					    <p class="text-secondary"> Profit -#{m.profit}Ks </p>		
-						<h:commandLink action = "#{productBean.update(m)}"  styleClass="btn btn-primary btn-sm mb-3" style="margin-left:40%;">Update</h:commandLink>
-						<h:commandLink action = "#{productBean.delete(m)}"  styleClass="btn btn-danger btn-sm ml-3 mb-3" style="margin-left:40%;">Delete</h:commandLink>
-					</div>
-					<p></p>	
-				</div>
-						
-				<div class="col-8 mb-2 ">
-					<p class="text-center text-secondary"> Ingredients </p>
-				  	<div class="row">	
-						<ui:repeat var="a" value="#{ingredientsBean.ingredientsService.findByProduct(m)}">
-							<div class="col-2">
-								<div class="shadow p-1 border border-secondary text-light">
-									<div class="text-center">
-										<h5>#{a.material.name} </h5>
-										<p>#{a.quantity} </p>
-									</div>
-									<div class="text-center">
-										<h:commandLink styleClass="text-primary mr-1" action="#{ingredientsBean.update(a)}">
-											<i class="fa fa-pencil" />
-										</h:commandLink>
-										<h:commandLink styleClass="text-danger ml-1" action="#{ingredientsBean.remove(m)}">
-											<i class="fa fa-remove" />
-										</h:commandLink>
-									</div>
-								</div>
-							</div>
-						</ui:repeat>
-					</div>	
-				</div>
-			</div>	
-		</ui:repeat>	
-		
+		<h:dataTable value="#{configProductBean.products}" var="p" styleClass="mt-2 table text-light" style="font-size: 12px;">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{p.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				#{p.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ingredients</f:facet>
+				<span class="mr-2">Material</span> <span class="ml-2">Quantity</span>
+				<ui:repeat var="i" value="#{configProductBean.generateIngredients(p)}">
+					<div class="">
+						<span class="mr-4"> #{i.material.name} </span>
+						<span class="ml-4"> #{i.quantity} Packs</span>
+					</div> <br />
+				</ui:repeat>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Cost</f:facet>
+				#{p.cost} MMK
+			</h:column>
+			<h:column>
+				<f:facet name="header">Profit</f:facet>
+				#{p.profit} MMK
+			</h:column>
+			<h:column>
+				<f:facet name="header">Price</f:facet>
+				#{p.price} MMK
+			</h:column>
+			<h:column>
+				<f:facet name="header">Description</f:facet>
+				#{p.description}
+			</h:column>
+		</h:dataTable>
+	</div>
 				
 	
 </h:form>
