@@ -1,0 +1,125 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+	<title>SMEMS | Admin | Account Configuration</title>
+
+	<link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="font-awesome.min.css"/>
+	
+	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+	<h:outputScript library="js" name="popper.min.js"></h:outputScript>
+
+</h:head> 
+<body style="background: #1D2126;"> 
+<h:form>
+	<nav class="navbar navbar-expand-lg navbar-dark shadow " style="background:#1F2328;">
+		<div class="container-fluid">
+			<a class="navbar-brand bg-white pt-1 pb-1 pl-5 pr-5 rounded-pill font-weight-bold text-dark" href="#">SMEMS</a>
+			<div class="text-center">
+				<ul class="navbar-nav" style="font-size: 12px;">
+					<li class="nav-item">
+						<a class="nav-link" href="DashBoard.xhtml"><i class="fa fa-dashboard" /> Dashboard<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="account.xhtml"><i class="fa fa-user" /> Accounts</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="staff.xhtml"><i class="fa fa-user" /> Staffs</a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="customer.xhtml"><i class="fa fa-user" /> Customers</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="attendance.xhtml"><i class="fa fa-check" /> Attendance </a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="absentRequest.xhtml"><i class="fa fa-comments" /> Absent Request </a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="overTime.xhtml"><i class="fa fa-clock-o" /> Overtimes </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="product.xhtml"><i class="fa fa-cubes" /> Products</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="material.xhtml"><i class="fa fa-cogs" /> Materials</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="inStock.xhtml"><i class="fa fa-list" /> InStocks</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="warehouse.xhtml"><i class="fa fa-database" /> Warehouse</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="job.xhtml"><i class="fa fa-suitcase" /> Jobs </a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="earlyPay.xhtml"><i class="fa fa-dollar" /> Early Pay </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="salaryBubget.xhtml"><i class="fa fa-bank" /> Salary_Budget </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="budget.xhtml"><i class="fa fa-bank" /> Budget </a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container-fluid text-light">
+	<div class="col-2 mt-1">
+		<h6 class="text-light p-1" style="background-color: #dc3545; height: 30px;">Date: #{configAttendanceBean.date}</h6>
+	</div>
+	
+	<h:dataTable style="font-size: 12px;" value="#{configStaffBean.staffs}" var="a" styleClass="table text-light">
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">ID</span></f:facet>
+				#{a.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">Name</span></f:facet>
+				#{a.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">Salary</span></f:facet>
+				#{a.salary}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">OverTime</span></f:facet>
+				#{salaryBudgetBean.totalAmount(a)}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">EarlyPay</span></f:facet>
+				#{salaryBudgetBean.earlypay(a)}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">Absent</span></f:facet>
+				#{salaryBudgetBean.Absent(a)}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">Total_Salary</span></f:facet>
+				#{salaryBudgetBean.TotalSalary(a)}
+			</h:column>
+					
+		</h:dataTable>
+	
+	</div>
+	
+	
+	
+	
+</h:form>
+</body> 
+</html>
