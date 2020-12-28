@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.rnc.smems.web.entities.EarlyPay;
+import com.rnc.smems.web.entities.OverTime;
 
 public class EarlyPayRepository {
 	
@@ -34,4 +35,12 @@ public class EarlyPayRepository {
 		TypedQuery<EarlyPay> query = entityManager.createQuery(sql, EarlyPay.class);
 		return query.getResultList();
 	}
+	
+	public List<EarlyPay> findByStaff (long id) {
+		String str = "select t from %s t where t.staff.id = "+id;
+		String sql = String.format(str, EarlyPay.class.getSimpleName());
+		TypedQuery<EarlyPay> query = entityManager.createQuery(sql, EarlyPay.class);
+		return query.getResultList();
+	}
+	
 }

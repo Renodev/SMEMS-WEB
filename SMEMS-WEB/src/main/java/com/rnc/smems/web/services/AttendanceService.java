@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.rnc.smems.web.entities.Attendance;
+import com.rnc.smems.web.entities.Staff;
 import com.rnc.smems.web.repositories.AttendanceRepository;
 
 @LocalBean
@@ -44,6 +45,15 @@ public class AttendanceService {
 	
 	public List<Attendance> findAll(){
 		return attendanceRepository.findAll();
+	}
+	
+	public List<Attendance> findByAbsent(Staff staff){
+		return attendanceRepository.findByAbsent(staff.getId());
+	}
+	
+	public List<Attendance> findByAttendance(LocalDate date){
+		return attendanceRepository.findByAttendance(date);
+		
 	}
 	
 }
