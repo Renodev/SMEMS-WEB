@@ -1,0 +1,69 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+	<title>SMEMS | Warehouse | Warehouse</title>
+
+	<link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="font-awesome.min.css"/>
+	
+	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+	<h:outputScript library="js" name="popper.min.js"></h:outputScript>
+
+</h:head> 
+<body style="background: #1D2126;"> 
+<h:form>
+	<nav class="navbar navbar-expand-lg navbar-dark shadow " style="background:#1F2328;">
+		<div class="container-fluid">
+			<a class="navbar-brand bg-white pt-1 pb-1 pl-5 pr-5 rounded-pill font-weight-bold text-dark" href="#">SMEMS</a>
+			<div class="text-center">
+				<ul class="navbar-nav" style="font-size: 12px;">
+					<li class="nav-item">
+						<a class="nav-link" href="#"><i class="fa fa-dashboard" /> Dashboard<span class="sr-only">(current)</span></a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="product.xhtml"><i class="fa fa-cubes" /> Products</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="material.xhtml"><i class="fa fa-cogs" /> Materials</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="inStock.xhtml"><i class="fa fa-list" /> InStocks</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="warehouse.xhtml"><i class="fa fa-database" /> Warehouse</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid row p-4">
+		<ui:repeat var="m" value="#{warehouseBean.materials}">
+			<div class="col-3">
+				<div class="row text-light mb-2">
+					<div class="col-2">
+						<h:commandLink styleClass="btn btn-danger btn-lg">
+							<i class="fa fa-cog" />
+						</h:commandLink>
+					</div>  
+					<div class="col-8" style="line-height: 16px;">
+						<p class="font-weight-bold" style="font-size: 16px;"> #{warehouseBean.generateQuantity(m)} Packs </p>
+						<p class="" style="font-size: 14px;">#{m.name}</p>
+					</div>
+				</div>
+			</div>
+		</ui:repeat>
+	</div>
+</h:form>
+</body> 
+</html>

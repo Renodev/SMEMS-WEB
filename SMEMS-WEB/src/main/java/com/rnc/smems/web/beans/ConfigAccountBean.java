@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.rnc.smems.web.entities.Account;
+import com.rnc.smems.web.enums.accountRole;
 import com.rnc.smems.web.services.AccountService;
 
 @Named
@@ -25,6 +26,9 @@ public class ConfigAccountBean implements Serializable{
 	
 	private List<Account> accounts;
 	
+	private accountRole [] accountroles;
+
+
 	@Inject
 	private AccountService accountService;
 	
@@ -33,6 +37,7 @@ public class ConfigAccountBean implements Serializable{
 		// account object initialization
 		account = new Account(); // statefull
 		accounts = accountService.findAll();
+		accountroles = accountRole.values();
 	}
 	
 	public void save () {
@@ -63,6 +68,14 @@ public class ConfigAccountBean implements Serializable{
 
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
+	}
+	
+	public accountRole[] getAccountroles() {
+		return accountroles;
+	}
+
+	public void setAccountroles(accountRole[] accountroles) {
+		this.accountroles = accountroles;
 	}
 
 }

@@ -7,7 +7,7 @@
 
 <h:head>
 
-	<title>SMEMS | Admin | Account Configuration</title>
+	<title>SMEMS | HR | AbsentRequest Configuration</title>
 
 	<link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 	
@@ -30,7 +30,7 @@
 					<li class="nav-item">
 						<a class="nav-link" href="#"><i class="fa fa-dashboard" /> Dashboard<span class="sr-only">(current)</span></a>
 					</li>
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="account.xhtml"><i class="fa fa-user" /> Accounts</a>
 					</li>
 					<li class="nav-item">
@@ -42,23 +42,11 @@
 					<li class="nav-item">
 						<a class="nav-link" href="attendance.xhtml"><i class="fa fa-check" /> Attendance </a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="absentRequest.xhtml"><i class="fa fa-comments" /> Absent Request </a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="overTime.xhtml"><i class="fa fa-clock-o" /> Overtimes </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="product.xhtml"><i class="fa fa-cubes" /> Products</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="material.xhtml"><i class="fa fa-cogs" /> Materials</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="inStock.xhtml"><i class="fa fa-list" /> InStocks</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="warehouse.xhtml"><i class="fa fa-database" /> Warehouse</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="job.xhtml"><i class="fa fa-suitcase" /> Jobs </a>
@@ -78,99 +66,89 @@
 		<div class="row mt-3 mb-2">
 			<div class="col-6 row">
 				<div class="form-group col-6">
-		  			<span>Name</span>
-		  			<h:inputText value="#{configAccountBean.account.name}" styleClass="form-control" style="height: 30px;" />
-		  		</div>
-		  		<div class="form-group col-6">
-		  			<span>Role</span>
-		  			<h:selectOneMenu value="#{configAccountBean.account.accountRole}" styleClass="form-control" style="height: 30px;">
-		  			<f:selectItems value="#{configAccountBean.accountroles}" var="r" itemlabel="#{r}" itelvalue="#{r}">  </f:selectItems>		  			
+		  			<span>Staff</span>
+		  			<h:selectOneMenu value="#{configAbsentRequestBean.absentRequest.staff}" converter="#{staffConverter}" styleClass="form-control" style="height: 30px;">
+		  				<f:selectItems value="#{configAbsentRequestBean.staffs}" var="s" itemValue="#{s}" itemLabel="#{s.name}"></f:selectItems>
 		  			</h:selectOneMenu>
 		  		</div>
 		  		<div class="form-group col-6">
-		  			<span>Phone</span>
-		  			<h:inputText value="#{configAccountBean.account.phone}" styleClass="form-control" style="height: 30px;" />
+		  			<span>DateFrom</span>
+		  			<h:inputText value="#{configAbsentRequestBean.absentRequest.dateFrom}" converter="#{localDateConverter}" p:type="date" styleClass="form-control" style="height: 30px;">
+		  				<f:ajax event="change" execute="@this" render="arfrm:od" listener="#{configAbsentRequestBean.generateOffDay()}"></f:ajax>
+		  			</h:inputText>
+		  				
 		  		</div>
 		  		<div class="form-group col-6">
-		  			<span>Email</span>
-		  			<h:inputText value="#{configAccountBean.account.email}" styleClass="form-control" style="height: 30px;" />
+		  			<span>Offday</span>
+		  			<h:inputText id="od" value="#{configAbsentRequestBean.absentRequest.offDay}" styleClass="form-control" style="height: 30px;" />
 		  		</div>
 		  		<div class="form-group col-6">
-		  			<span>Username</span>
-		  			<h:inputText value="#{configAccountBean.account.username}" styleClass="form-control" style="height: 30px;" />
+		  			<span>DateTo</span>
+		  			<h:inputText value="#{configAbsentRequestBean.absentRequest.dateTo}" converter="#{localDateConverter}" p:type="date" styleClass="form-control" style="height: 30px;">
+		  				<f:ajax event="change" execute="@this" render="arfrm:od" listener="#{configAbsentRequestBean.generateOffDay()}"></f:ajax>
+		  			</h:inputText>
 		  		</div>
-		  		<div class="form-group col-6">
-		  			<span>Password</span>
-		  			<h:inputText value="#{configAccountBean.account.password}" styleClass="form-control" style="height: 30px;" />
-		  		</div>
+		  		
 			</div>
 			<div class="col-6">
 				<div class="form-group">
-		  			<span> Address </span>
-		  			<h:inputTextarea value="#{configAccountBean.account.address}" styleClass="form-control" style="height: 100px;" />
+		  			<span> Description </span>
+		  			<h:inputTextarea value="#{configAbsentRequestBean.absentRequest.description}" styleClass="form-control" style="height: 60px;" />
 		  		</div>
 		  		<div class="row">
 		  			<div class="form-group col-6">
-		  				<span> - </span>
-		  				<h:commandLink action="#{configAccountBean.initialize()}" styleClass="btn btn-sm btn-danger form-control" style="height: 30px;">
+		  				
+		  				<h:commandLink action="#{configAbsentRequestBean.initialize()}" styleClass="btn btn-sm btn-danger form-control" style="height: 30px;">
 		  					<i class="fa fa-refresh" /> Refresh
 		  				</h:commandLink>
 		  			</div>
 		  			<div class="form-group col-6">
-		  				<span> - </span>
-		  				<h:commandLink action="#{configAccountBean.save()}" styleClass="btn btn-sm btn-success form-control" style="height: 30px;">
+		  				
+		  				<h:commandLink action="#{configAbsentRequestBean.save()}" styleClass="btn btn-sm btn-success form-control" style="height: 30px;">
 							<i class="fa fa-check" /> Save		  					
 		  				</h:commandLink>
 		  			</div>
 		  		</div>
 			</div>
 		</div>
-		<h:dataTable style="font-size: 12px;" value="#{configAccountBean.accounts}" var="a" styleClass="table text-light">
+		<h:dataTable style="font-size: 12px;" value="#{configAbsentRequestBean.absentRequests}" var="ab" styleClass="table text-light">
 			<h:column>
 				<f:facet name="header"><span class="text-secondary">ID</span></f:facet>
-				#{a.id}
+				#{ab.id}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span class="text-secondary">Name</span></f:facet>
-				#{a.name}
+				<f:facet name="header"><span class="text-secondary">Staff</span></f:facet>
+				#{ab.staff.name}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span class="text-secondary">Role</span></f:facet>
-				#{a.accountRole}
+				<f:facet name="header"><span class="text-secondary">DateFrom</span></f:facet>
+				#{ab.dateFrom}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span class="text-secondary">Phone</span></f:facet>
-				#{a.phone}
+				<f:facet name="header"><span class="text-secondary">DateTo</span></f:facet>
+				#{ab.dateTo}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span class="text-secondary">Email</span></f:facet>
-				#{a.email}
+				<f:facet name="header"><span class="text-secondary">Offday</span></f:facet>
+				#{ab.offDay}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span class="text-secondary">User Name</span></f:facet>
-				#{a.username}
+				<f:facet name="header"><span class="text-secondary">Description</span></f:facet>
+				#{ab.description}
 			</h:column>
 			<h:column>
-				<f:facet name="header"><span class="text-secondary">Password</span></f:facet>
-				#{a.password}
-			</h:column>
-			<h:column>
-				<f:facet name="header"><span class="text-secondary">Address</span></f:facet>
-				#{a.address}
-			</h:column>
-			<h:column>
-				<h:commandLink action="#{configAccountBean.update(a)}" styleClass="btn btn-sm btn-primary">
+				<h:commandLink action="#{configAbsentRequestBean.update(ab)}" styleClass="btn btn-sm btn-primary">
 					<i class="fa fa-pencil" />
 				</h:commandLink>
 			</h:column>
 			<h:column>
-				<h:commandLink action="#{configAccountBean.delete(a)}" styleClass="btn btn-sm btn-danger">
+				<h:commandLink action="#{configAbsentRequestBean.delete(ab)}" styleClass="btn btn-sm btn-danger">
 					<i class="fa fa-remove" />
 				</h:commandLink>
 			</h:column>
 		</h:dataTable>
+		
 	</div>
-	
 	
 </h:form>
 </body> 

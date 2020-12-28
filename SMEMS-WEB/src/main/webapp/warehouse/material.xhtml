@@ -1,0 +1,106 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+	<title>SMEMS | Warehouse | Material</title>
+
+	<link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="font-awesome.min.css"/>
+	
+	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+	<h:outputScript library="js" name="popper.min.js"></h:outputScript>
+
+</h:head> 
+<body style="background: #1D2126;"> 
+<h:form>
+	<nav class="navbar navbar-expand-lg navbar-dark shadow " style="background:#1F2328;">
+		<div class="container-fluid">
+			<a class="navbar-brand bg-white pt-1 pb-1 pl-5 pr-5 rounded-pill font-weight-bold text-dark" href="#">SMEMS</a>
+			<div class="text-center">
+				<ul class="navbar-nav" style="font-size: 12px;">
+					<li class="nav-item">
+						<a class="nav-link" href="#"><i class="fa fa-dashboard" /> Dashboard<span class="sr-only">(current)</span></a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="product.xhtml"><i class="fa fa-cubes" /> Products</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="material.xhtml"><i class="fa fa-cogs" /> Materials</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="inStock.xhtml"><i class="fa fa-list" /> InStocks</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="warehouse.xhtml"><i class="fa fa-database" /> Warehouse</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid text-light">
+		<div class="row mt-3 mb-2">
+			<div class="col-6 row">
+				<div class="form-group col-6">
+		  			<span>Name</span>
+		  			<h:inputText value="#{configMaterialBean.material.name}" styleClass="form-control" style="height: 30px;" />
+		  		</div>
+		  		<div class="form-group col-6">
+		  			<span>Price</span>
+		  			<h:inputText value="#{configMaterialBean.material.price}" styleClass="form-control" style="height: 30px;" />
+		  		</div>
+		  		<div class="form-group col-6">
+	  				<span> - </span>
+	  				<h:commandLink action="#{configMaterialBean.initialze()}" styleClass="btn btn-sm btn-danger form-control" style="height: 30px;">
+	  					<i class="fa fa-refresh" /> Refresh
+	  				</h:commandLink>
+	  			</div>
+	  			<div class="form-group col-6">
+	  				<span> - </span>
+	  				<h:commandLink action="#{configMaterialBean.save()}" styleClass="btn btn-sm btn-success form-control" style="height: 30px;">
+						<i class="fa fa-check" /> Save		  					
+	  				</h:commandLink>
+	  			</div>
+			</div>
+			<div class="col-6">
+				<div class="form-group">
+		  			<span> Description </span>
+		  			<h:inputTextarea value="#{configMaterialBean.material.description}" styleClass="form-control" style="height: 100px;" />
+		  		</div>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<ui:repeat var="m" value="#{configMaterialBean.materials}">
+				<div class="col-3 p-2">
+					<div class="shadow p-2 border border-secondary">
+						<div class="text-center">
+							<h5> #{m.name} </h5>
+							<p>#{m.price} MMK</p>
+							#{m.description}
+						</div>
+						<div class="text-center">
+							<h:commandLink styleClass="text-primary mr-1" action="#{configMaterialBean.update(m)}">
+								<i class="fa fa-pencil" />
+							</h:commandLink>
+							<h:commandLink styleClass="text-danger ml-1" action="#{configMaterialBean.delete(m)}">
+								<i class="fa fa-remove" />
+							</h:commandLink>
+						</div>
+					</div>
+				</div>
+			</ui:repeat>
+		</div>		
+	</div>
+
+</h:form>
+</body> 
+</html>
