@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.rnc.smems.web.entities.Attendance;
+import com.rnc.smems.web.entities.Staff;
 
 public class AttendanceRepository {
 	
@@ -46,4 +47,19 @@ public class AttendanceRepository {
 		TypedQuery<Attendance> query = entityManager.createQuery(sql, Attendance.class);
 		return query.getResultList();
 	}
+	
+	public List<Attendance> findByAbsent (long id) {
+		String str = "select t from %s t where t.present = false and t.staff.id = " +id;
+		String sql = String.format(str, Attendance.class.getSimpleName());
+		TypedQuery<Attendance> query = entityManager.createQuery(sql, Attendance.class);
+		return query.getResultList();	
+	}
+	
+	public List<Attendance> findByAttendance (LocalDate date) {
+		String str = "select t from %s t where t.present = true and t.Date = '"+date.toString()+"'";
+		String sql = String.format(str, Attendance.class.getSimpleName());
+		TypedQuery<Attendance> query = entityManager.createQuery(sql, Attendance.class);
+		return query.getResultList();
+	}
+	
 }

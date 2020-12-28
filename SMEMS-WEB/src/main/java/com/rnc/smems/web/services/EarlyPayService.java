@@ -8,6 +8,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.rnc.smems.web.entities.EarlyPay;
+import com.rnc.smems.web.entities.OverTime;
+import com.rnc.smems.web.entities.Staff;
 import com.rnc.smems.web.repositories.EarlyPayRepository;
 
 @LocalBean
@@ -34,4 +36,8 @@ public class EarlyPayService {
 	public List<EarlyPay> findAll () {
 		return earlypayRepository.findAll();
 	}
+	public List<EarlyPay> findByStaff(Staff staff){
+		return earlypayRepository.findByStaff(staff.getId());
+	}
+	
 }
