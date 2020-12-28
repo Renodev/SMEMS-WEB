@@ -12,6 +12,7 @@ import com.rnc.smems.web.entities.Account;
 import com.rnc.smems.web.enums.accountRole;
 import com.rnc.smems.web.services.AccountService;
 
+
 @Named
 @ViewScoped
 public class ConfigAccountBean implements Serializable{
@@ -33,7 +34,7 @@ public class ConfigAccountBean implements Serializable{
 	private AccountService accountService;
 	
 	@PostConstruct
-	public void initialize () {
+	public void initialize ()  {
 		// account object initialization
 		account = new Account(); // statefull
 		accounts = accountService.findAll();
