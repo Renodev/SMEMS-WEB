@@ -73,7 +73,94 @@
 			</div>
 		</div>
 	</nav>
-
+<div class="container-fluid text-light">
+		<div class="row mt-3 mb-2">
+			<div class="col-6 row">
+		  		<div class="form-group col-6">
+		  			<span>Customer</span>
+		  			<h:selectOneMenu value="#{configJobBean.job.customer}" converter="#{customerConverter}" styleClass="form-control" style="height: 30px;">
+		  				<f:selectItems value="#{configJobBean.customers}" var="c" itemValue="#{c}" itemLabel="#{c.name}"></f:selectItems>
+		  			</h:selectOneMenu>
+		  		</div>
+		  		<div class="form-group col-6">
+		  			<span>Product</span>
+		  			<h:selectOneMenu value="#{configJobBean.job.product}" converter="#{productConverter}" styleClass="form-control" style="height: 30px;">
+		  				<f:selectItems value="#{configJobBean.products}" var="pr" itemValue="#{pr}" itemLabel="#{pr.name}"></f:selectItems>
+		  			</h:selectOneMenu>
+		  		</div>
+		  		<div class="form-group col-6">
+		  			<span>Deposit</span>
+		  			<h:inputText value="#{configJobBean.job.deposit}" styleClass="form-control" style="height: 30px;" />
+		  		</div>
+		  		<div class="form-group col-6">
+		  			<span>RestCost</span>
+		  			<h:inputText value="#{configJobBean.job.restCost}" styleClass="form-control" style="height: 30px;" />
+		  		</div>
+		  		<div class="form-group col-6">
+	  				<span> - </span>
+	  				<h:commandLink action="#{configJobBean.initialize()}" styleClass="btn btn-sm btn-danger form-control" style="height: 30px;">
+	  					<i class="fa fa-refresh" /> Refresh
+	  				</h:commandLink>
+	  			</div>
+	  			<div class="form-group col-6">
+	  				<span> - </span>
+	  				<h:commandLink action="#{configJobBean.save()}" styleClass="btn btn-sm btn-success form-control" style="height: 30px;">
+						<i class="fa fa-check" /> Save		  					
+	  				</h:commandLink>
+	  			</div>
+			</div>
+			<div class="col-6">
+				<div class="form-group">
+		  			<span> Description </span>
+		  			<h:inputTextarea value="#{configJobBean.job.description}" styleClass="form-control" style="height: 180px;" />
+		  		</div>
+		  		<div class="row">
+		  			
+		  		</div>
+			</div>
+		</div>
+		<h:dataTable value="#{configJobBean.jobs}" var="j" style="font-size: 12px;" styleClass="table text-light">
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">ID</span></f:facet>
+				#{j.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">Date</span></f:facet>
+				#{j.date}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">Product</span></f:facet>
+				#{j.product.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">Customer</span></f:facet>
+				#{j.customer.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">Deposit</span></f:facet>
+				#{j.deposit}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">RestCost</span></f:facet>
+				#{j.restCost}
+			</h:column>
+			<h:column>
+				<f:facet name="header"><span class="text-secondary">Description</span></f:facet>
+				#{j.description}
+			</h:column>
+			<h:column>
+				<h:commandLink action="#{configJobBean.update(j)}" styleClass="btn btn-sm btn-primary">
+					<i class="fa fa-pencil" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
+				<h:commandLink action="#{configJobBean.delete(j)}" styleClass="btn btn-sm btn-danger">
+					<i class="fa fa-remove" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+	</div>
+	
 </h:form>
 </body> 
 </html>
