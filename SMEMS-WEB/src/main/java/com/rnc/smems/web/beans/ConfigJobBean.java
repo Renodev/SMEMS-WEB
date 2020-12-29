@@ -139,6 +139,4 @@ public class ConfigJobBean implements Serializable {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	
 }

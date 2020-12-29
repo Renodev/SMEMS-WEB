@@ -152,6 +152,4 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 }

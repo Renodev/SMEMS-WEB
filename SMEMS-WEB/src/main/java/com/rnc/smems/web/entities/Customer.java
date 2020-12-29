@@ -162,6 +162,4 @@ public class Customer implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 }

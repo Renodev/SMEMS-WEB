@@ -34,6 +34,4 @@ public class ProductConverter implements Converter<Product> {
 		}
 		return null;
 	}
-
-	
 }

@@ -34,6 +34,4 @@ public class CustomerConverter implements Converter<Customer> {
 		}
 		return null;
 	}
-	
-	
 }
