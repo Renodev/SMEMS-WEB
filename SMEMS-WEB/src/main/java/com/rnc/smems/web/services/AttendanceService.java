@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.rnc.smems.web.entities.AbsentRequest;
 import com.rnc.smems.web.entities.Attendance;
 import com.rnc.smems.web.entities.Staff;
 import com.rnc.smems.web.repositories.AttendanceRepository;
@@ -23,6 +24,22 @@ public class AttendanceService {
 			attendanceRepository.save(attendance);
 		} else {
 			update(attendance);
+		}
+	}
+	public void getAttendance(AbsentRequest absentRequest) {
+		if(absentRequest.getDateFrom()!=null && absentRequest.getDateTo()!=null) {
+			LocalDate current = absentRequest.getDateFrom();
+			while(!current.isEqual(absentRequest.getDateTo())) {
+				
+				Attendance attendance = new Attendance();
+				
+				attendance.setDate(current);
+				attendance.setStaff(absentRequest.getStaff());
+				attendance.setPresent(true);
+				attendance.setDescription(absentRequest.getDescription());
+				save(attendance);
+				current= current.plusDays(1);
+			}	
 		}
 	}
 	

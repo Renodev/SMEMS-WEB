@@ -2,10 +2,12 @@ package com.rnc.smems.web.services;
 
 import java.util.List;
 
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.rnc.smems.web.beans.ConfigAttendanceBean;
 import com.rnc.smems.web.entities.AbsentRequest;
 import com.rnc.smems.web.repositories.AbsentRequestRepository;
 
@@ -20,6 +22,7 @@ import com.rnc.smems.web.repositories.AbsentRequestRepository;
 @Stateless
 public class AbsentRequestService {
 	
+	
 	@Inject
 	private AbsentRequestRepository absentRequestRepositories;
 	
@@ -33,6 +36,7 @@ public class AbsentRequestService {
 	public void delete(AbsentRequest absentRequest) {
 		absentRequest.setErase(true);
 		absentRequestRepositories.update(absentRequest);
+		
 		
 	}
 	
