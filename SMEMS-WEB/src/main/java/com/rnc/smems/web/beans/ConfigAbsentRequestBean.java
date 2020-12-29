@@ -16,6 +16,7 @@ import javax.inject.Named;
 import com.rnc.smems.web.entities.AbsentRequest;
 import com.rnc.smems.web.entities.Staff;
 import com.rnc.smems.web.services.AbsentRequestService;
+import com.rnc.smems.web.services.AttendanceService;
 import com.rnc.smems.web.services.StaffService;
 
 /**
@@ -36,6 +37,9 @@ public class ConfigAbsentRequestBean implements Serializable{
 	private List<Staff> staffs; 
 	
 	private List<AbsentRequest> absentRequests;
+	
+	@Inject
+	private AttendanceService attendanceService;
 	
 	@Inject
 	private AbsentRequestService absentRequestService;
@@ -72,6 +76,7 @@ public class ConfigAbsentRequestBean implements Serializable{
 	
 	public void save() {
 		absentRequestService.save(absentRequest);
+		attendanceService.getAttendance(absentRequest);
 		initialize();
 	}
 	public void update(AbsentRequest absentRequest) {
