@@ -56,13 +56,6 @@ public class ConfigOverTimeBean implements Serializable{
 		//attendStaff = new ArrayList<>();
 		//attendStaff = attendanceService.findByAttendance(date);
 	}
-	
-	public List<Attendance> Attendstaff(){
-		
-		date = LocalDate.now();
-		attendStaff =  attendanceService.findByAttendance(date);
-		return attendStaff;
-	}
 
 
 	

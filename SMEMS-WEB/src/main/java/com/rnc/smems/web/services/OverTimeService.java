@@ -48,7 +48,7 @@ public class OverTimeService {
 		return overtimeRepository.findByStaff(staff.getId());
 	}
 	
-	//public List<OverTime> findByMonth(){
-		//return overtimeRepository.findByMonth();
-	//}
+	public List<OverTime> findByStaffDateFromAndDateTo(Staff staff,String dateFrom, String dateTo){
+		return overtimeRepository.findByStaffAndDateFromAndDateTo(staff.getId(),dateFrom,dateTo);
+	}
 }

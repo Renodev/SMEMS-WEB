@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.rnc.smems.web.entities.Attendance;
+import com.rnc.smems.web.entities.OverTime;
 import com.rnc.smems.web.entities.Staff;
 
 public class AttendanceRepository {
@@ -40,7 +41,7 @@ public class AttendanceRepository {
 		TypedQuery<Attendance> query = entityManager.createQuery(sql, Attendance.class);
 		return query.getResultList();
 	}
-	
+
 	public List<Attendance> findAll() {
 		String str = "select t from %s t";
 		String sql = String.format(str, Attendance.class.getSimpleName());
@@ -48,18 +49,22 @@ public class AttendanceRepository {
 		return query.getResultList();
 	}
 	
-	public List<Attendance> findByAbsent (long id) {
+	/*public List<Attendance> findByAbsent (long id) {
 		String str = "select t from %s t where t.present = false and t.staff.id = " +id;
 		String sql = String.format(str, Attendance.class.getSimpleName());
 		TypedQuery<Attendance> query = entityManager.createQuery(sql, Attendance.class);
 		return query.getResultList();	
-	}
+	}*/
 	
-	public List<Attendance> findByAttendance (LocalDate date) {
-		String str = "select t from %s t where t.present = true and t.Date = '"+date.toString()+"'";
+	public List<Attendance>  findByStaffAndDateFromAndDateTo (long id, String dateFrom, String dateTo) {
+		String str = "select t from %s t where t.present = false and t.staff.id = "+id+"and t.Date between'"+dateFrom+"'and'"+dateTo+"'";
 		String sql = String.format(str, Attendance.class.getSimpleName());
 		TypedQuery<Attendance> query = entityManager.createQuery(sql, Attendance.class);
 		return query.getResultList();
-	}
 	
+		
+		
+		
+	
+	}	
 }

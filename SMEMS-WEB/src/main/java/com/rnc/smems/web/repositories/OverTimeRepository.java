@@ -51,18 +51,13 @@ public class OverTimeRepository {
 		return query.getResultList();
 	}
 	
-	/*public List<OverTime>  findByMonth () {
-		String Date = LocalDate.now().toString();
-		String str = "select t from %s t where t.Date = " +Date;
+	public List<OverTime>  findByStaffAndDateFromAndDateTo (long id, String dateFrom, String dateTo) {
+		
+		String str = "select t from %s t where t.staff.id = "+id+"and t.date between'"+dateFrom+"'and'"+dateTo+"'";
 		String sql = String.format(str, OverTime.class.getSimpleName());
 		TypedQuery<OverTime> query = entityManager.createQuery(sql, OverTime.class);
 		return query.getResultList();
-	}
-	*/
 	
 	
-	
-	
-	
-	
+	}	
 }

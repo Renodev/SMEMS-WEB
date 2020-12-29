@@ -64,13 +64,8 @@ public class AttendanceService {
 		return attendanceRepository.findAll();
 	}
 	
-	public List<Attendance> findByAbsent(Staff staff){
-		return attendanceRepository.findByAbsent(staff.getId());
-	}
-	
-	public List<Attendance> findByAttendance(LocalDate date){
-		return attendanceRepository.findByAttendance(date);
-		
+	public List<Attendance> findByStaffDateFromAndDateTo(Staff staff,String dateFrom, String dateTo){
+		return attendanceRepository.findByStaffAndDateFromAndDateTo(staff.getId(),dateFrom,dateTo);
 	}
 	
 }
