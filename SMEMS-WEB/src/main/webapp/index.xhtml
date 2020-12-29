@@ -25,22 +25,22 @@
 		 		<div class="card-body">
 			    	<h5 class="card-title">Sign In</h5>
 			    	<div class="alert alert-primary" role="alert">
-			    	#{signInBean.message}
+			    	#{securityBean.message}
 					</div>
 			    	<div class="form-group">
 			    		<label class="text-secondary">Username</label>
-			    		<h:inputText styleClass="form-control rounded-pill" />
+			    		<h:inputText value="#{securityBean.username}" styleClass="form-control rounded-pill" />
 			    	</div>
 			    	<div class="form-group">
 			    		<label class="text-secondary">Password</label>
-			    		<h:inputSecret styleClass="form-control rounded-pill" />
+			    		<h:inputSecret  value="#{securityBean.password}" styleClass="form-control rounded-pill" />
 			    	</div>
 			    	<div class="row mt-4">
 			    		<div class="col">
-			    			<h:commandLink value="Clear" styleClass="btn btn-outline-danger form-control rounded-pill" ></h:commandLink>
+			    			<h:commandLink value="Clear" styleClass="btn btn-outline-danger form-control rounded-pill" />
 			    		</div>
 			    		<div class="col">
-			    			<h:commandLink value="Sign In" styleClass="btn btn-outline-primary form-control rounded-pill" />
+			    			<h:commandLink action="#{securityBean.signIn()}" value="Sign In" styleClass="btn btn-outline-primary form-control rounded-pill" />
 			    		</div>
 			    	</div>
 		  		</div>

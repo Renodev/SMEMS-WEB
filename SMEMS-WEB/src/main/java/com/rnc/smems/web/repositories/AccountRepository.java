@@ -39,4 +39,18 @@ public class AccountRepository {
 		return query.getResultList();
 	}
 	
+	public Account findByUsernameAndPassword (String username, String password) {
+		String str = "select t from %s t where t.username = '"+username+"' AND t.password = '"+password+"' ";
+		String sql = String.format(str, Account.class.getSimpleName());
+		TypedQuery<Account> query = entityManager.createQuery(sql, Account.class);
+			try {
+				return query.getSingleResult();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+			
+	}
+	
 }

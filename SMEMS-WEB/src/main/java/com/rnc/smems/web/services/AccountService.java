@@ -36,5 +36,8 @@ public class AccountService {
 	public List<Account> findAll() {
 		return accountRepository.findAll();
 	}
-		
+
+	public Account findByUsernameAndPassword (String username, String passsword) {
+		return accountRepository.findByUsernameAndPassword(username, passsword);
+	}
 }
