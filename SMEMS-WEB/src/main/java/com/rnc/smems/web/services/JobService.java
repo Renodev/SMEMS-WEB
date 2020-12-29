@@ -47,4 +47,5 @@ public class JobService {
 		return jobRepository.findByProduct(product.getId());
 	}
 	
+	
 }

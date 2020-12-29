@@ -45,4 +45,5 @@ public class JobRepository {
 		return query.getResultList();
 	}
 	
+	
 }
