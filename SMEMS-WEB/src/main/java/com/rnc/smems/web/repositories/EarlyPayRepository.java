@@ -36,11 +36,15 @@ public class EarlyPayRepository {
 		return query.getResultList();
 	}
 	
-	public List<EarlyPay> findByStaff (long id) {
-		String str = "select t from %s t where t.staff.id = "+id;
+	
+
+	public List<EarlyPay>  findByStaffAndDateFromAndDateTo (long id, String dateFrom, String dateTo) {
+		
+		String str = "select t from %s t where t.staff.id = "+id+"and t.date between'"+dateFrom+"'and'"+dateTo+"'";
 		String sql = String.format(str, EarlyPay.class.getSimpleName());
 		TypedQuery<EarlyPay> query = entityManager.createQuery(sql, EarlyPay.class);
 		return query.getResultList();
-	}
+	}	
+	
 	
 }

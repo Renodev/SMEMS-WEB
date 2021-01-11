@@ -36,8 +36,9 @@ public class EarlyPayService {
 	public List<EarlyPay> findAll () {
 		return earlypayRepository.findAll();
 	}
-	public List<EarlyPay> findByStaff(Staff staff){
-		return earlypayRepository.findByStaff(staff.getId());
+
+	public List<EarlyPay> findByStaffDateFromAndDateTo(Staff staff,String dateFrom, String dateTo){
+		return earlypayRepository.findByStaffAndDateFromAndDateTo(staff.getId(),dateFrom,dateTo);
 	}
 	
 }

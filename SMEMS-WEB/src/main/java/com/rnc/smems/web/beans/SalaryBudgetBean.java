@@ -58,6 +58,14 @@ public class SalaryBudgetBean implements Serializable {
 	
 	private double absentAmount;
 	
+	private String date;
+	
+	private String m;
+	
+	private String dateFrom = Date.toString().substring(0,4)+"-"+Date.getMonthValue()+"-01";
+	
+	private String dateTo = Date.toString().substring(0,4)+"-"+Date.getMonthValue()+"-"+Date.getDayOfMonth();
+	
 	@Enumerated(EnumType.STRING)
 	private Month month;
 	
@@ -90,15 +98,36 @@ public class SalaryBudgetBean implements Serializable {
 	}
 	
 	public String ForOneDay(Staff staff) {
-        //System.out.println(Date.getDayOfMonth());
-		double OneDay = staff.getSalary() / Date.lengthOfMonth();
-		return df.format(OneDay);
+       
+		if (date == "date") {
+			
+			if(m.equals("FEBRUARY")) {
+				if(checkLeapYear(year)){
+					double OneDay = staff.getSalary() / 29;
+					return df.format(OneDay);
+				}else {
+					double OneDay = staff.getSalary() / 28;
+					return df.format(OneDay);
+				}	
+			}
+			
+			else if (m.equals("SEPTEMBER") || m.equals("APRIL") || m.equals("JUNE") || m.equals("NOVEMBER")) {
+				double OneDay = staff.getSalary() / 30;
+				return df.format(OneDay);
+			}
+			else {
+				double OneDay = staff.getSalary() / 31;
+				return df.format(OneDay);
+			}
+		}
+		
+		else {
+			double OneDay = staff.getSalary() / Date.lengthOfMonth();
+			return df.format(OneDay);
+		}
 	}
 	
-	
-	
 	public String ForOneHour(Staff staff) {	
-		
 		
 		double OneHour = Double.parseDouble(ForOneDay(staff)) / 8;	
 		return df.format(OneHour);
@@ -107,18 +136,15 @@ public class SalaryBudgetBean implements Serializable {
 	public double TotalOvertime(Staff staff) {
 		
 		int TotalHours = 0;
-		
-		String dateFrom = Date.toString().substring(0,4)+"-"+Date.getMonthValue()+"-01";
-		String dateTo = Date.toString().substring(0,4)+"-"+Date.getMonthValue()+"-"+Date.getDayOfMonth();
-		overtimes = overtimeService.findByStaffDateFromAndDateTo(staff, dateFrom, dateTo );
+		overtimes = overtimeService.findByStaffDateFromAndDateTo(staff, dateFrom, dateTo);
 		for(OverTime overtime : overtimes) {
 			TotalHours += overtime.getHour();
 		}
-		//System.out.println(TotalHours);
 		return TotalHours;	
 	}
 	
-	/*private String getEndOfMonth(LocalDate date) {
+	/*
+	private String getEndOfMonth(LocalDate date) {
 		
 		String month = date.getMonth().toString();
 		if (month.equals(2)) {
@@ -131,20 +157,34 @@ public class SalaryBudgetBean implements Serializable {
 		}	
 	}*/
 	
+	private boolean checkLeapYear(int year) {
+		
+		if (year % 4 == 0) {
+			if (year % 100 == 0) {
+				if (year % 400 == 0) {
+					return true;
+				}else {
+					return false;
+				}	
+			}else {
+				return false;
+			}	
+		}else {
+			return false;
+		}
+	}
+	
 
 	public String totalAmount(Staff staff) {
-					
+		
 		double TotalAmount = Double.parseDouble(ForOneHour(staff)) * TotalOvertime(staff);
-			
-			return df.format(TotalAmount);
+		return df.format(TotalAmount);
 		}
 	
 	public double earlypay(Staff staff) {
 		
 		double earlypayAmount = 0;
-		
-		earlypays = earlypayService.findByStaff(staff);
-		
+		earlypays = earlypayService.findByStaffDateFromAndDateTo(staff, dateFrom, dateTo);
 		for(EarlyPay earlypay : earlypays) {
 			earlypayAmount += earlypay.getAmount();
 		}
@@ -153,118 +193,104 @@ public class SalaryBudgetBean implements Serializable {
 	
 	public String Absent(Staff staff) {
 		
-		String dateFrom = Date.toString().substring(0,4)+"-"+Date.getMonthValue()+"-01";
-		String dateTo = Date.toString().substring(0,4)+"-"+Date.getMonthValue()+"-"+Date.getDayOfMonth();
-		
 		attendances = attendanceService.findByStaffDateFromAndDateTo(staff, dateFrom, dateTo);
 		double absentAmount = Double.parseDouble(ForOneDay(staff)) * attendances.size();
 		return df.format(absentAmount);
 		
 	}
 	
-	public double getTotal() {
-		return Total;
-	}
-
-	public void setTotal(double total) {
-		Total = total;
-	}
-
-	public double getAbsentAmount() {
-		return absentAmount;
-	}
-
-	public void setAbsentAmount(double absentAmount) {
-		this.absentAmount = absentAmount;
-	}
-
 	public String TotalSalary(Staff staff) {
 		
 		double Total = ( staff.getSalary() + Double.parseDouble(totalAmount(staff)) ) -
 				( earlypay(staff) + Double.parseDouble(Absent(staff)) );
-		return df.format(Total);
+		return df.format(Total);	
+	}
+	
+	
+	
+	public void Search() {
+		
+		for(Staff staff : staffs) {
+			date = String.valueOf(Date);
+			date = "date";
+			m = String.valueOf(month);
+			
+			if(m.equals("JANUARY")) {
+				dateFrom  = String.valueOf(year) +"-1-01";
+				dateTo = String.valueOf(year)+"-1-31";
+			}
+			else if(m.equals("FEBRUARY")) {
+				
+				if(m.equals("FEBRUARY")) {
+					if(checkLeapYear(year)){
+						dateFrom  = String.valueOf(year) +"-2-01";
+						dateTo = String.valueOf(year)+"-2-29";
+					}
+					else {
+						dateFrom  = String.valueOf(year) +"-2-01";
+						dateTo = String.valueOf(year)+"-2-28";
+					}	
+				}					
+			}
+			else if(m.equals("MARCH")) {
+				//dateFrom  = String.valueOf(year) +"-3-01";
+				//dateTo = String.valueOf(year)+"-3-31";
+				dateFrom  = "2021-1-01";
+				dateTo = "2021-1-7";
+				
+				//System.out.println(Date);
+				//dateFrom = Date.toString().substring(0,4)+"-"+Date.getMonthValue()+"-01";
+				//dateTo = Date.toString().substring(0,4)+"-"+Date.getMonthValue()+"-"+Date.getDayOfMonth();
+				
+			}
+			else if(m.equals("APRIL")) {
+				dateFrom  = String.valueOf(year) +"-4-01";
+				dateTo = String.valueOf(year)+"-4-30";
+			}
+			else if(m.equals("MAY")) {
+				dateFrom  = String.valueOf(year) +"-5-01";
+				dateTo = String.valueOf(year)+"-5-31";
+			}
+			else if(m.equals("JUNE")) {
+				dateFrom  = String.valueOf(year) +"-6-01";
+				dateTo = String.valueOf(year)+"-6-30";
+			}
+			else if(m.equals("JUNLY")) {
+				dateFrom  = String.valueOf(year) +"-7-01";
+				dateTo = String.valueOf(year)+"-7-31";
+			}
+			else if(m.equals("AUGUST")) {
+				dateFrom  = String.valueOf(year) +"-8-01";
+				dateTo = String.valueOf(year)+"-8-31";
+			}
+			else if(m.equals("SEPTEMBER")) {
+				dateFrom  = String.valueOf(year) +"-9-01";
+				dateTo = String.valueOf(year)+"-9-31";
+			}
+			else if(m.equals("OCTOBER")) {
+				dateFrom  = String.valueOf(year) +"-10-01";
+				dateTo = String.valueOf(year)+"-10-31";
+			}
+			else if(m.equals("NOVEMBER")) {
+				dateFrom  = String.valueOf(year) +"-11-01";
+				dateTo = String.valueOf(year)+"-11-31";
+			}
+			else if(m.equals("DECEMBER")){
+				dateFrom  = String.valueOf(year) +"-12-01";
+				dateTo = String.valueOf(year)+"-12-30";
+			}
+						
+			ForOneDay(staff);
+			ForOneHour(staff);
+			TotalOvertime(staff);
+			totalAmount(staff);
+			earlypay(staff);
+			Absent(staff);
+			TotalSalary(staff);		
+		}
 		
 	}
 	
-	/*public void DateFromDateTo(Staff staff) {
-		
-		int TotalHours = 0;
-		System.out.println(year);
-		System.out.println(month);
-		
-		
-		if(month.equals("JANUARY")) {
-			this.OneDay = staff.getSalary() / 31;
-			this.dateFrom  = String.valueOf(year) +"1-01";
-			this.dateTo = String.valueOf(year)+"-1-31";
-		}
-		else if(month.equals("FEBRUARY")) {
-			this.dateFrom  = String.valueOf(year) +"2-01";
-			this.dateTo = String.valueOf(year)+"-2-28";
-		}
-		else if(month.equals("March")) {
-			this.dateFrom  = String.valueOf(year) +"3-01";
-			this.dateTo = String.valueOf(year)+"-3-31";
-		}
-		else if(month.equals("April")) {
-			this.dateTo = String.valueOf(year)+"-4-30";
-		}
-		else if(month.equals("May")) {
-			this.dateFrom  = String.valueOf(year) +"5-01";
-			this.dateTo = String.valueOf(year)+"-5-31";
-		}
-		else if(month.equals("June")) {
-			this.dateFrom  = String.valueOf(year) +"6-01";
-			this.dateTo = String.valueOf(year)+"-6-30";
-		}
-		else if(month.equals("Junly")) {
-			this.dateFrom  = String.valueOf(year) +"7-01";
-			this.dateTo = String.valueOf(year)+"-7-31";
-		}
-		else if(month.equals("August")) {
-			this.dateFrom  = String.valueOf(year) +"8-01";
-			this.dateTo = String.valueOf(year)+"-8-31";
-		}
-		else if(month.equals("September")) {
-			this.dateFrom  = String.valueOf(year) +"9-01";
-			this.dateTo = String.valueOf(year)+"-9-31";
-		}
-		else if(month.equals("October")) {
-			this.dateFrom  = String.valueOf(year) +"10-01";
-			this.dateTo = String.valueOf(year)+"-10-31";
-		}
-		else if(month.equals("November")) {
-			this.dateFrom  = String.valueOf(year) +"11-01";
-			this.dateTo = String.valueOf(year)+"-11-31";
-		}
-		else{
-			this.dateFrom  = String.valueOf(year) +"12-01";
-			this.dateTo = String.valueOf(year)+"-12-30";
-		}
-		
-		this.OneHour = OneDay / 8;
-		
-		overtimes = overtimeService.findByStaffDateFromAndDateTo(staff, dateFrom, dateTo);
-		for(OverTime overtime : overtimes) {
-			TotalHours += overtime.getHour();
-		}
-		this.TotalAmount = OneHour * TotalHours;
-		
-		double earlypayAmount = 0;
-		
-		earlypays = earlypayService.findByStaff(staff);
-		
-		for(EarlyPay earlypay : earlypays) {
-			earlypayAmount += earlypay.getAmount();
-		}
-		
-		attendances = attendanceService.findByStaffDateFromAndDateTo(staff, dateFrom, dateTo);
-		this.absentAmount = OneDay * attendances.size();
-		
-		this.Total = ( staff.getSalary() + TotalAmount ) -
-				( earlypayAmount + absentAmount );	
-		
-	}*/
 	
 	public LocalDate getDate() {
 		return Date;
@@ -396,7 +422,23 @@ public class SalaryBudgetBean implements Serializable {
 		this.months = months;
 	}
 
-	
+
+	public double getTotal() {
+		return Total;
+	}
+
+	public void setTotal(double total) {
+		Total = total;
+	}
+
+	public double getAbsentAmount() {
+		return absentAmount;
+	}
+
+	public void setAbsentAmount(double absentAmount) {
+		this.absentAmount = absentAmount;
+	}
+
 	
 	
 	
